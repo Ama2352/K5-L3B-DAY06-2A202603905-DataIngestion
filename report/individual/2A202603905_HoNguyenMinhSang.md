@@ -95,7 +95,7 @@ Hướng cải thiện: chốt test mới rõ scope trước chạy, mở rộng
 
 ## 6. Tái lập và nộp
 
-Lệnh setup/run trong `RUNNING.md`, code ở `starter/src/`. Từ root: `python -m starter.src.corpus`, `python -m starter.src.run validate`, rồi `python -m starter.src.run experiment`. Bản đã chạy cần sao lưu kết quả và dùng `--allow-rerun` khi muốn tái lập. Truy xuất C bằng `--section "2. Setup"` hoặc `--section "3. Experiments"`. Web demo tạm bỏ theo yêu cầu.
+Lệnh setup/run trong `README.md`, code ở `starter/src/`. Từ root: `python -m starter.src.corpus`, `python -m starter.src.run validate`, rồi `python -m starter.src.run experiment`. Bản đã chạy cần sao lưu kết quả và dùng `--allow-rerun` khi muốn tái lập. Truy xuất C bằng `--section "2. Setup"` hoặc `--section "3. Experiments"`. Web demo tạm bỏ theo yêu cầu.
 
 Minh chứng: manifest/PDF/attribution, benchmark/questions, strategies/experiment log, 45 dev + 15 test traces đủ top-3, metrics/ingest stats, environment/frozen inputs/selection, 90 nhãn và audit summary, log setup thật. Không giữ file snapshot chunk/review inputs trùng lặp hoặc kết quả HTML cũ trong working tree.
 
@@ -112,6 +112,6 @@ Thông tin học viên và link repo ở `STUDENT.md`; commit chốt là HEAD nh
 | Ba cấu hình và so sánh có kiểm soát | `artifacts/strategies.json`, `artifacts/experiment_log.csv`; B–C chỉ thay filter |
 | Top-3, dev/test metrics, thời gian và chi phí | Hai file trace (45 dev + 15 test), `metrics.csv`, `ingest_stats.csv`, `frozen_inputs.json`, `selection.json` |
 | Audit và phân tích năm khía cạnh | 90 nhãn có lý do/phương pháp, học viên đã xem xét; `review_labels.json`, `audit_summary.csv` và mục 3–5 của báo cáo |
-| Hướng dẫn tái lập, báo cáo và log | `RUNNING.md`, báo cáo cá nhân này, `results/errors.json` là log setup thật |
+| Hướng dẫn tái lập, báo cáo và log | `README.md`, báo cáo cá nhân này, `results/errors.json` là log setup thật |
 | Secret và quyền chia sẻ | `.env`, venv, model cache không đưa vào commit; nguồn PDF có giấy phép và attribution |
 | Push, quyền truy cập người chấm, nộp link | Thực hiện theo kênh lớp bên ngoài repo; hồ sơ local không tự chứng minh đã nộp |
