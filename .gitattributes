@@ -1,0 +1,3 @@
+# Preserve source snapshots and hashed experiment inputs across platforms.
+data/raw/*.html -text
+*.json -text whitespace=cr-at-eol

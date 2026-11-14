@@ -1,0 +1,350 @@
+{
+  "counting_rule": "HTML has no physical pages. Split each chapter in order at paragraph boundaries after 3500 normalized characters; merge a final tail shorter than 1500. No duplication. Page means 1-based unit within chapter.",
+  "normalization": "NFC, prose whitespace normalization; code indentation preserved. Main-body headings, paragraphs and code only. Navigation excluded.",
+  "sources": [
+    {
+      "source_id": "controlflow",
+      "title": "4. More Control Flow Tools",
+      "source_path_or_url": "https://docs.python.org/3.13/tutorial/controlflow.html",
+      "snapshot_path": "data/raw/controlflow.html",
+      "snapshot_sha256": "b985d14cc9c7b109996d54c17e32b3f214c5e4cd0e9020de060f12ed0413bd49",
+      "normalized_sha256": "d1ead9c2eaeb26df86000ef236e7c7ea48e2e94cb34f1e40f7321e3c895dd7d3",
+      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
+      "license_url": "https://docs.python.org/3.13/license.html",
+      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
+      "physical_pages": null,
+      "content_units": 10,
+      "units": [
+        {
+          "page": 1,
+          "characters": 3791,
+          "start": 0,
+          "end": 3791
+        },
+        {
+          "page": 2,
+          "characters": 3750,
+          "start": 3791,
+          "end": 7541
+        },
+        {
+          "page": 3,
+          "characters": 3519,
+          "start": 7541,
+          "end": 11060
+        },
+        {
+          "page": 4,
+          "characters": 4109,
+          "start": 11060,
+          "end": 15169
+        },
+        {
+          "page": 5,
+          "characters": 3538,
+          "start": 15169,
+          "end": 18707
+        },
+        {
+          "page": 6,
+          "characters": 3752,
+          "start": 18707,
+          "end": 22459
+        },
+        {
+          "page": 7,
+          "characters": 3598,
+          "start": 22459,
+          "end": 26057
+        },
+        {
+          "page": 8,
+          "characters": 3757,
+          "start": 26057,
+          "end": 29814
+        },
+        {
+          "page": 9,
+          "characters": 3612,
+          "start": 29814,
+          "end": 33426
+        },
+        {
+          "page": 10,
+          "characters": 2427,
+          "start": 33426,
+          "end": 35853
+        }
+      ]
+    },
+    {
+      "source_id": "datastructures",
+      "title": "5. Data Structures",
+      "source_path_or_url": "https://docs.python.org/3.13/tutorial/datastructures.html",
+      "snapshot_path": "data/raw/datastructures.html",
+      "snapshot_sha256": "14cbb79ca8991c75ff9a17db2057640e528bb43b00925e58dd57de2cde746e5b",
+      "normalized_sha256": "2cf44e65e7e7634808193dc1fceb99010293893a03c6c6d965581d57774fee22",
+      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
+      "license_url": "https://docs.python.org/3.13/license.html",
+      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
+      "physical_pages": null,
+      "content_units": 6,
+      "units": [
+        {
+          "page": 1,
+          "characters": 3773,
+          "start": 0,
+          "end": 3773
+        },
+        {
+          "page": 2,
+          "characters": 3510,
+          "start": 3773,
+          "end": 7283
+        },
+        {
+          "page": 3,
+          "characters": 3863,
+          "start": 7283,
+          "end": 11146
+        },
+        {
+          "page": 4,
+          "characters": 3798,
+          "start": 11146,
+          "end": 14944
+        },
+        {
+          "page": 5,
+          "characters": 3551,
+          "start": 14944,
+          "end": 18495
+        },
+        {
+          "page": 6,
+          "characters": 4008,
+          "start": 18495,
+          "end": 22503
+        }
+      ]
+    },
+    {
+      "source_id": "modules",
+      "title": "6. Modules",
+      "source_path_or_url": "https://docs.python.org/3.13/tutorial/modules.html",
+      "snapshot_path": "data/raw/modules.html",
+      "snapshot_sha256": "e331102d5eba9f1135e82bbec33defbceb638fe3b6d190694ba93b008e597bdc",
+      "normalized_sha256": "a99b16113824feaff3779855e7121a5e985644c65e754835fde3dd8b552d8089",
+      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
+      "license_url": "https://docs.python.org/3.13/license.html",
+      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
+      "physical_pages": null,
+      "content_units": 6,
+      "units": [
+        {
+          "page": 1,
+          "characters": 3504,
+          "start": 0,
+          "end": 3504
+        },
+        {
+          "page": 2,
+          "characters": 3786,
+          "start": 3504,
+          "end": 7290
+        },
+        {
+          "page": 3,
+          "characters": 5055,
+          "start": 7290,
+          "end": 12345
+        },
+        {
+          "page": 4,
+          "characters": 3643,
+          "start": 12345,
+          "end": 15988
+        },
+        {
+          "page": 5,
+          "characters": 3762,
+          "start": 15988,
+          "end": 19750
+        },
+        {
+          "page": 6,
+          "characters": 3198,
+          "start": 19750,
+          "end": 22948
+        }
+      ]
+    },
+    {
+      "source_id": "inputoutput",
+      "title": "7. Input and Output",
+      "source_path_or_url": "https://docs.python.org/3.13/tutorial/inputoutput.html",
+      "snapshot_path": "data/raw/inputoutput.html",
+      "snapshot_sha256": "be403cb24a4d23ddcde2f29ac20df4743e8216ac69d1244382c58dc2ae2a44f4",
+      "normalized_sha256": "b0fd907c0a6fd168ac1c518e2fda54fd49fa0072270689104b1ecdd4f8dbe526",
+      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
+      "license_url": "https://docs.python.org/3.13/license.html",
+      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
+      "physical_pages": null,
+      "content_units": 5,
+      "units": [
+        {
+          "page": 1,
+          "characters": 3610,
+          "start": 0,
+          "end": 3610
+        },
+        {
+          "page": 2,
+          "characters": 3564,
+          "start": 3610,
+          "end": 7174
+        },
+        {
+          "page": 3,
+          "characters": 3892,
+          "start": 7174,
+          "end": 11066
+        },
+        {
+          "page": 4,
+          "characters": 3503,
+          "start": 11066,
+          "end": 14569
+        },
+        {
+          "page": 5,
+          "characters": 3865,
+          "start": 14569,
+          "end": 18434
+        }
+      ]
+    },
+    {
+      "source_id": "errors",
+      "title": "8. Errors and Exceptions",
+      "source_path_or_url": "https://docs.python.org/3.13/tutorial/errors.html",
+      "snapshot_path": "data/raw/errors.html",
+      "snapshot_sha256": "979a709f665207b9bfaddd3dd8ea2ff9632afa4f3a7986198730cac14e662683",
+      "normalized_sha256": "f49e286986426da50a3be66db0e8711e4b8e769ce2e7af0b73727f9a73ec9065",
+      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
+      "license_url": "https://docs.python.org/3.13/license.html",
+      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
+      "physical_pages": null,
+      "content_units": 6,
+      "units": [
+        {
+          "page": 1,
+          "characters": 3576,
+          "start": 0,
+          "end": 3576
+        },
+        {
+          "page": 2,
+          "characters": 3773,
+          "start": 3576,
+          "end": 7349
+        },
+        {
+          "page": 3,
+          "characters": 3510,
+          "start": 7349,
+          "end": 10859
+        },
+        {
+          "page": 4,
+          "characters": 3609,
+          "start": 10859,
+          "end": 14468
+        },
+        {
+          "page": 5,
+          "characters": 4169,
+          "start": 14468,
+          "end": 18637
+        },
+        {
+          "page": 6,
+          "characters": 2973,
+          "start": 18637,
+          "end": 21610
+        }
+      ]
+    },
+    {
+      "source_id": "classes",
+      "title": "9. Classes",
+      "source_path_or_url": "https://docs.python.org/3.13/tutorial/classes.html",
+      "snapshot_path": "data/raw/classes.html",
+      "snapshot_sha256": "6adb5bbe14eb9e8ed843d0ba03a33dd392d8ff8e8a70c5e1673dc97497cb2311",
+      "normalized_sha256": "7cd4bd64376fbd6efbead09478071df4c36293f52877fa05efddbcb61085e083",
+      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
+      "license_url": "https://docs.python.org/3.13/license.html",
+      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
+      "physical_pages": null,
+      "content_units": 9,
+      "units": [
+        {
+          "page": 1,
+          "characters": 4063,
+          "start": 0,
+          "end": 4063
+        },
+        {
+          "page": 2,
+          "characters": 3749,
+          "start": 4063,
+          "end": 7812
+        },
+        {
+          "page": 3,
+          "characters": 3552,
+          "start": 7812,
+          "end": 11364
+        },
+        {
+          "page": 4,
+          "characters": 3792,
+          "start": 11364,
+          "end": 15156
+        },
+        {
+          "page": 5,
+          "characters": 3567,
+          "start": 15156,
+          "end": 18723
+        },
+        {
+          "page": 6,
+          "characters": 3707,
+          "start": 18723,
+          "end": 22430
+        },
+        {
+          "page": 7,
+          "characters": 3792,
+          "start": 22430,
+          "end": 26222
+        },
+        {
+          "page": 8,
+          "characters": 3961,
+          "start": 26222,
+          "end": 30183
+        },
+        {
+          "page": 9,
+          "characters": 3541,
+          "start": 30183,
+          "end": 33724
+        }
+      ]
+    }
+  ],
+  "total_content_units": 42,
+  "total_characters": 155072
+}

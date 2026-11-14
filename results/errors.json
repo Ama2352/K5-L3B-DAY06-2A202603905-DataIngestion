@@ -1,0 +1,8 @@
+[
+  {
+    "at": "2026-11-13T16:58:42.712054+00:00",
+    "command": "experiment",
+    "type": "ConnectionTimeout",
+    "message": "External backend/model operation failed. Check Docker, DATABASE_URL and local model availability."
+  }
+]

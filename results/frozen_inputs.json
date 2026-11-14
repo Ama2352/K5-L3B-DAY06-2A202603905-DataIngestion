@@ -1,0 +1,40 @@
+{
+  "started_at": "2026-11-14T04:29:20.719270+00:00",
+  "sha256": {
+    "data/pages.json": "e48a6e9f5ee1136368a17a6d46ccc18eca087fa5c8c11ceb315ba4fd4adeebf9",
+    "data/manifest.json": "60b4e7aa7770a4bbd4344cfc40c758fa6e4a45cb32007a8c22bab4a543324d65",
+    "benchmark/questions.json": "2feac5ca4d7b3542b4c2e528627cee9269c540db4e8da60dab43593bc2e55ac6",
+    "benchmark/coherence_locations.json": "40714716bba8242f7f9e5428eb0db6a052f93822d325d87f2023a26210bf14b0",
+    "artifacts/strategies.json": "72d302e690ec08a82fa4edaff9c4b045c0206c05cac2f2b28ba783853532c7cc"
+  },
+  "selection_rule": "dev Hit@3 DESC, dev Hit@1 DESC, chunk count ASC, strategy name ASC",
+  "rerun_after_test_exposure": true,
+  "validation": {
+    "source_units": 42,
+    "dev": 15,
+    "test": 5,
+    "filter_questions": 4,
+    "filter_test": 2
+  },
+  "configs": {
+    "A": {
+      "chunking": "fixed",
+      "size": 500,
+      "overlap": 50,
+      "filter": false
+    },
+    "B": {
+      "chunking": "paragraph",
+      "size": 1000,
+      "overlap": 0,
+      "filter": false
+    },
+    "C": {
+      "chunking": "paragraph",
+      "size": 1000,
+      "overlap": 0,
+      "filter": true
+    }
+  },
+  "model": "BAAI/bge-small-en-v1.5"
+}

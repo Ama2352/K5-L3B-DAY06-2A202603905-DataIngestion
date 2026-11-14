@@ -1,0 +1,125 @@
+{
+  "amended_at": "2026-11-13T17:56:31.679290+00:00",
+  "question_id": "q12",
+  "reason": "Independent code/source review found a second valid evidence location omitted from gold.",
+  "original_benchmark": "benchmark/questions_v1.json",
+  "original_sha256": "2aa95a57cf5719eab111a04abead8c1fb0123c95bae94be3450b9adc31b73324",
+  "current_benchmark": "benchmark/questions.json",
+  "current_sha256": "2feac5ca4d7b3542b4c2e528627cee9269c540db4e8da60dab43593bc2e55ac6",
+  "original_outputs": "results/original_scoring/",
+  "test_had_been_evaluated": true,
+  "changes": "Added alternative gold only; no question/split/config/model/corpus/query/hit/ranking changes. Rescored identical stored top-3 for all strategies. Original dev selection retained.",
+  "holdout_limitation": "Post-run annotation correction; do not describe corrected scores as an untouched independent test.",
+  "metrics_before": [
+    {
+      "strategy": "A",
+      "split": "dev",
+      "n": "15",
+      "hit1_n": "7",
+      "hit3_n": "9",
+      "hit1": "0.4666666666666667",
+      "hit3": "0.6"
+    },
+    {
+      "strategy": "A",
+      "split": "test",
+      "n": "5",
+      "hit1_n": "0",
+      "hit3_n": "0",
+      "hit1": "0.0",
+      "hit3": "0.0"
+    },
+    {
+      "strategy": "B",
+      "split": "dev",
+      "n": "15",
+      "hit1_n": "13",
+      "hit3_n": "14",
+      "hit1": "0.8666666666666667",
+      "hit3": "0.9333333333333333"
+    },
+    {
+      "strategy": "B",
+      "split": "test",
+      "n": "5",
+      "hit1_n": "5",
+      "hit3_n": "5",
+      "hit1": "1.0",
+      "hit3": "1.0"
+    },
+    {
+      "strategy": "C",
+      "split": "dev",
+      "n": "15",
+      "hit1_n": "13",
+      "hit3_n": "14",
+      "hit1": "0.8666666666666667",
+      "hit3": "0.9333333333333333"
+    },
+    {
+      "strategy": "C",
+      "split": "test",
+      "n": "5",
+      "hit1_n": "5",
+      "hit3_n": "5",
+      "hit1": "1.0",
+      "hit3": "1.0"
+    }
+  ],
+  "metrics_after": [
+    {
+      "strategy": "A",
+      "split": "dev",
+      "n": 15,
+      "hit1_n": 7,
+      "hit3_n": 9,
+      "hit1": 0.4666666666666667,
+      "hit3": 0.6
+    },
+    {
+      "strategy": "A",
+      "split": "test",
+      "n": 5,
+      "hit1_n": 0,
+      "hit3_n": 1,
+      "hit1": 0.0,
+      "hit3": 0.2
+    },
+    {
+      "strategy": "B",
+      "split": "dev",
+      "n": 15,
+      "hit1_n": 13,
+      "hit3_n": 14,
+      "hit1": 0.8666666666666667,
+      "hit3": 0.9333333333333333
+    },
+    {
+      "strategy": "B",
+      "split": "test",
+      "n": 5,
+      "hit1_n": 5,
+      "hit3_n": 5,
+      "hit1": 1.0,
+      "hit3": 1.0
+    },
+    {
+      "strategy": "C",
+      "split": "dev",
+      "n": 15,
+      "hit1_n": 13,
+      "hit3_n": 14,
+      "hit1": 0.8666666666666667,
+      "hit3": 0.9333333333333333
+    },
+    {
+      "strategy": "C",
+      "split": "test",
+      "n": 5,
+      "hit1_n": 5,
+      "hit3_n": 5,
+      "hit1": 1.0,
+      "hit3": 1.0
+    }
+  ]
+}

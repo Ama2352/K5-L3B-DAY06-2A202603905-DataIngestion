@@ -1,0 +1,258 @@
+[
+  {
+    "id": "q01",
+    "split": "dev",
+    "question": "Which built-in function generates arithmetic progressions for looping over numbers?",
+    "expected_answer": "range() generates arithmetic progressions.",
+    "gold_source_id": "controlflow",
+    "gold_page": 1,
+    "evidence_quote": "If you do need to iterate over a sequence of numbers, the built-in function\nrange() comes in handy. It generates arithmetic progressions:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q02",
+    "split": "dev",
+    "question": "Which enclosing loop does a break statement exit?",
+    "expected_answer": "The innermost enclosing for or while loop.",
+    "gold_source_id": "controlflow",
+    "gold_page": 2,
+    "evidence_quote": "The break statement breaks out of the innermost enclosing\nfor or while loop:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q03",
+    "split": "dev",
+    "question": "What does continue do inside a Python loop?",
+    "expected_answer": "It continues with the next iteration.",
+    "gold_source_id": "controlflow",
+    "gold_page": 2,
+    "evidence_quote": "The continue statement continues with the next\niteration of the loop:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q04",
+    "split": "test",
+    "question": "Why can a mutable default list accumulate values across function calls?",
+    "expected_answer": "Default values are evaluated only once, so calls can share the same mutable object.",
+    "gold_source_id": "controlflow",
+    "gold_page": 6,
+    "evidence_quote": "Important warning: The default value is evaluated only once. This makes a\ndifference when the default is a mutable object such as a list, dictionary, or\ninstances of most classes. For example, the following function accumulates the\narguments passed to it on subsequent calls:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q05",
+    "split": "dev",
+    "question": "How do tuples and lists differ in mutability and typical element usage?",
+    "expected_answer": "Tuples are immutable and usually heterogeneous; lists are mutable and usually homogeneous.",
+    "gold_source_id": "datastructures",
+    "gold_page": 3,
+    "evidence_quote": "Though tuples may seem similar to lists, they are often used in different\nsituations and for different purposes.\nTuples are immutable, and usually contain a heterogeneous sequence of\nelements that are accessed via unpacking (see later in this section) or indexing\n(or even by attribute in the case of namedtuples).\nLists are mutable, and their elements are usually homogeneous and are\naccessed by iterating over the list.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q06",
+    "split": "dev",
+    "question": "In the data structures chapter, what properties define a set and what are its basic uses?",
+    "expected_answer": "An unordered collection without duplicates, useful for membership tests and removing duplicates.",
+    "gold_source_id": "datastructures",
+    "gold_page": 4,
+    "evidence_quote": "Python also includes a data type for sets. A set is\nan unordered collection with no duplicate elements. Basic uses include\nmembership testing and eliminating duplicate entries. Set objects also\nsupport mathematical operations like union, intersection, difference, and\nsymmetric difference.",
+    "filter": {
+      "chapter": "datastructures"
+    },
+    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q07",
+    "split": "dev",
+    "question": "How does del differ from pop when removing list items?",
+    "expected_answer": "del removes items by index or slices without returning a value, whereas pop returns a value.",
+    "gold_source_id": "datastructures",
+    "gold_page": 3,
+    "evidence_quote": "There is a way to remove an item from a list given its index instead of its\nvalue: the del statement. This differs from the pop() method\nwhich returns a value. The del statement can also be used to remove\nslices from a list or clear the entire list (which we did earlier by assignment\nof an empty list to the slice). For example:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q08",
+    "split": "test",
+    "question": "Why can a script beside a standard-library module name shadow that library module?",
+    "expected_answer": "The script directory precedes the standard-library directory on sys.path.",
+    "gold_source_id": "modules",
+    "gold_page": 2,
+    "evidence_quote": "After initialization, Python programs can modify sys.path. The\ndirectory containing the script being run is placed at the beginning of the\nsearch path, ahead of the standard library path. This means that scripts in that\ndirectory will be loaded instead of modules of the same name in the library\ndirectory. This is an error unless the replacement is intended. See section\nStandard Modules for more information.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q09",
+    "split": "dev",
+    "question": "How often are module initialization statements executed by import, and what happens when run as a script?",
+    "expected_answer": "They run on the first import of that module name and also when the file runs as a script.",
+    "gold_source_id": "modules",
+    "gold_page": 1,
+    "evidence_quote": "A module can contain executable statements as well as function definitions.\nThese statements are intended to initialize the module. They are executed only\nthe first time the module name is encountered in an import statement. [1]\n(They are also run if the file is executed as a script.)",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q10",
+    "split": "dev",
+    "question": "Where does Python cache compiled modules and how are the cache files named?",
+    "expected_answer": "In __pycache__, using module.version.pyc so versions can coexist.",
+    "gold_source_id": "modules",
+    "gold_page": 3,
+    "evidence_quote": "To speed up loading modules, Python caches the compiled version of each module\nin the __pycache__ directory under the name module.version.pyc,\nwhere the version encodes the format of the compiled file; it generally contains\nthe Python version number. For example, in CPython release 3.3 the compiled\nversion of spam.py would be cached as __pycache__/spam.cpython-33.pyc. This\nnaming convention allows compiled modules from different releases and different\nversions of Python to coexist.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q11",
+    "split": "dev",
+    "question": "According to the modules chapter, what does dir() return for a module?",
+    "expected_answer": "A sorted list of strings naming what the module defines.",
+    "gold_source_id": "modules",
+    "gold_page": 3,
+    "evidence_quote": "The built-in function dir() is used to find out which names a module\ndefines. It returns a sorted list of strings:",
+    "filter": {
+      "chapter": "modules"
+    },
+    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q12",
+    "split": "test",
+    "question": "Why use with when working with files if an exception may occur?",
+    "expected_answer": "The file is properly closed when the suite finishes, including when an exception is raised.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 4,
+    "evidence_quote": "It is good practice to use the with keyword when dealing\nwith file objects. The advantage is that the file is properly closed\nafter its suite finishes, even if an exception is raised at some\npoint. Using with is also much shorter than writing\nequivalent try-finally blocks:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection.",
+    "alternative_gold": [
+      {
+        "gold_source_id": "errors",
+        "gold_page": 5,
+        "evidence_quote": "After the statement is executed, the file f is always closed, even if a\nproblem was encountered while processing the lines.",
+        "review_note": "The predefined clean-up section independently supports automatic file closure even if processing fails."
+      }
+    ]
+  },
+  {
+    "id": "q13",
+    "split": "dev",
+    "question": "How can readline distinguish end-of-file from an empty line?",
+    "expected_answer": "End-of-file is an empty string; a blank line contains a newline character.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 4,
+    "evidence_quote": "f.readline() reads a single line from the file; a newline character (\\n)\nis left at the end of the string, and is only omitted on the last line of the\nfile if the file doesn’t end in a newline. This makes the return value\nunambiguous; if f.readline() returns an empty string, the end of the file\nhas been reached, while a blank line is represented by '\\n', a string\ncontaining only a single newline.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q14",
+    "split": "dev",
+    "question": "What do serializing and deserializing mean when using JSON with Python data?",
+    "expected_answer": "Serializing converts Python data to a string representation; deserializing reconstructs it.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 5,
+    "evidence_quote": "Rather than having users constantly writing and debugging code to save\ncomplicated data types to files, Python allows you to use the popular data\ninterchange format called JSON (JavaScript Object Notation). The standard module called json can take Python\ndata hierarchies, and convert them to string representations; this process is\ncalled serializing. Reconstructing the data from the string representation\nis called deserializing. Between serializing and deserializing, the\nstring representing the object may have been stored in a file or data, or\nsent over a network connection to some distant machine.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q15",
+    "split": "dev",
+    "question": "Why put successful follow-up work in try/except/else rather than in the try block?",
+    "expected_answer": "To avoid catching exceptions from work outside the code intended to be protected.",
+    "gold_source_id": "errors",
+    "gold_page": 3,
+    "evidence_quote": "The use of the else clause is better than adding additional code to\nthe try clause because it avoids accidentally catching an exception\nthat wasn’t raised by the code being protected by the try …\nexcept statement.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q16",
+    "split": "test",
+    "question": "In the errors chapter, does finally run if the try statement produces no exception?",
+    "expected_answer": "Yes. It executes before try completes whether or not an exception occurred.",
+    "gold_source_id": "errors",
+    "gold_page": 4,
+    "evidence_quote": "If a finally clause is present, the finally\nclause will execute as the last task before the try\nstatement completes. The finally clause runs whether or\nnot the try statement produces an exception. The following\npoints discuss more complex cases when an exception occurs:",
+    "filter": {
+      "chapter": "errors"
+    },
+    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q17",
+    "split": "dev",
+    "question": "How can multiple exception instances be raised together in Python?",
+    "expected_answer": "Wrap them in an ExceptionGroup, which is itself an exception.",
+    "gold_source_id": "errors",
+    "gold_page": 5,
+    "evidence_quote": "The builtin ExceptionGroup wraps a list of exception instances so\nthat they can be raised together. It is an exception itself, so it can be\ncaught like any other exception.",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q18",
+    "split": "dev",
+    "question": "How do instance variables differ from class variables?",
+    "expected_answer": "Instance variables hold data unique to an instance; class variables are shared by all instances.",
+    "gold_source_id": "classes",
+    "gold_page": 5,
+    "evidence_quote": "Generally speaking, instance variables are for data unique to each instance\nand class variables are for attributes and methods shared by all instances\nof the class:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q19",
+    "split": "dev",
+    "question": "When is __init__ invoked for a new class instance?",
+    "expected_answer": "Class instantiation automatically invokes it for the newly created instance.",
+    "gold_source_id": "classes",
+    "gold_page": 4,
+    "evidence_quote": "When a class defines an __init__() method, class instantiation\nautomatically invokes __init__() for the newly created class instance. So\nin this example, a new, initialized instance can be obtained by:",
+    "filter": {},
+    "filter_origin": "No filter.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  },
+  {
+    "id": "q20",
+    "split": "test",
+    "question": "According to the classes chapter, does a single leading underscore enforce private access?",
+    "expected_answer": "No. It is a convention for non-public implementation details, not enforced private access.",
+    "gold_source_id": "classes",
+    "gold_page": 7,
+    "evidence_quote": "“Private” instance variables that cannot be accessed except from inside an\nobject don’t exist in Python. However, there is a convention that is followed\nby most Python code: a name prefixed with an underscore (e.g. _spam) should\nbe treated as a non-public part of the API (whether it is a function, a method\nor a data member). It should be considered an implementation detail and subject\nto change without notice.",
+    "filter": {
+      "chapter": "classes"
+    },
+    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
+    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+  }
+]
