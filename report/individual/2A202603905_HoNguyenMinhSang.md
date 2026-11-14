@@ -3,7 +3,7 @@
 - Họ tên: **Hồ Nguyễn Minh Sang**.
 - MSSV: **2A202603905**; lớp: **L3B**.
 - Chủ đề: truy xuất bằng chứng về dữ liệu, kiến trúc và thực nghiệm transfer learning cho NLP từ paper T5.
-- Công cụ: Codex hỗ trợ triển khai, soạn câu hỏi, kiểm chứng nguồn, chạy thí nghiệm và đọc/chấm audit. Nhãn PDF có AI hỗ trợ và lý do; không giả định xác nhận audit HTML trước đây áp dụng cho corpus mới.
+- Công cụ: Codex hỗ trợ triển khai, soạn câu hỏi, kiểm chứng nguồn, chạy thí nghiệm và đọc/chấm audit. Học viên đã kiểm tra kết quả thực nghiệm và xem xét audit của corpus PDF T5, xác nhận các nhãn hiện có. Nhãn ban đầu có AI hỗ trợ, kèm lý do và phương pháp.
 
 ## 1. Dữ liệu và pipeline
 
@@ -76,7 +76,7 @@ Metadata được đọc trên **5 test × top-3 × 3 = 45 bản ghi**; đối c
 | B | 1,5 | 15/15 | 2/2 | 0 / 0 / 5 | 2,0 |
 | C | 1,5 | 15/15 | 2/2 | 0 / 0 / 5 | 2,0 |
 
-Phương pháp/người chấm: Codex đọc các text/context hiển thị và ghi nhãn có lý do, metadata có thêm đối chiếu tự động nguồn/span. Nhãn **AI-assisted** và thiên lệch được công bố trong `review_labels.json`. B/C có cùng chunk mẫu và cùng test hits; kiểm chứng tính giống nhau trước khi áp dụng cùng nhận xét. Học viên đã xác nhận audit HTML trước đây, nhưng xác nhận đó **không được dùng cho PDF**; `human_review_status=pending` ở corpus mới. Không có blinded reviewer hoặc đo đồng thuận độc lập.
+Phương pháp/người chấm: Codex hỗ trợ đọc text/context và gán nhãn ban đầu có lý do; metadata có thêm đối chiếu tự động nguồn/span. Học viên đã kiểm tra kết quả và xem xét audit PDF, xác nhận các nhãn hiện có mà không yêu cầu thay đổi điểm. `review_labels.json` giữ reviewer/phương pháp AI-assisted ban đầu và ghi `human_review_status=confirmed_by_student`, người xác nhận, căn cứ và thời điểm ghi nhận. B/C có cùng chunk mẫu và cùng test hits; tính giống nhau đã được kiểm chứng trước khi áp dụng cùng nhận xét. Đây không phải chấm mù hay đo đồng thuận độc lập; thiên lệch vẫn được công bố.
 
 `source/page/start/end` giúp mở lại đoạn gốc, `section` bảo đảm phạm vi khi người dùng yêu cầu. Tuy nhiên cả B và C đã trả kết quả đúng scope ở các câu filter hiện tại, nên chưa thấy tăng Hit. A/B không thực thi filter dù top-3 hai câu filter test tình cờ đều thuộc Experiments; 2/2 không chứng minh A/B có cơ chế filter. Main section khá rộng, không xử lý nhầm lẫn giữa các ý trong cùng section.
 
@@ -99,4 +99,19 @@ Lệnh setup/run trong `RUNNING.md`, code ở `starter/src/`. Từ root: `python
 
 Minh chứng: manifest/PDF/attribution, benchmark/questions, strategies/experiment log, 45 dev + 15 test traces đủ top-3, metrics/ingest stats, environment/frozen inputs/selection, 90 nhãn và audit summary, log setup thật. Không giữ file snapshot chunk/review inputs trùng lặp hoặc kết quả HTML cũ trong working tree.
 
-Thông tin học viên và link repo ở `STUDENT.md`; commit chốt là HEAD nhánh main tại thời điểm nộp. Cần phân biệt nhãn AI-assisted PDF mới với xác nhận audit cũ. Bước push, bảo đảm người chấm truy cập được và nộp link theo kênh lớp là thao tác nộp bên ngoài repo. Không commit secret, .env, venv hay model cache.
+Thông tin học viên và link repo ở `STUDENT.md`; commit chốt là HEAD nhánh main tại thời điểm nộp. Học viên đã xác nhận kiểm tra kết quả và audit PDF hiện tại; nguồn hỗ trợ AI được giữ rõ trong báo cáo và file nhãn. Bước push, bảo đảm người chấm truy cập được và nộp link theo kênh lớp là thao tác nộp bên ngoài repo. Không commit secret, .env, venv hay model cache.
+
+## 7. Đối chiếu hồ sơ nộp theo SUBMISSION.md
+
+| Yêu cầu | Minh chứng trong repo |
+|---|---|
+| Thông tin học viên, repo | `STUDENT.md` có họ tên, MSSV, lớp, link repo và cách lấy commit chốt |
+| Corpus ≥30 trang, nguồn và quyền | PDF gốc 67 trang; manifest chọn 37 trang vật lý 4–40; `data/ATTRIBUTION.md` ghi CC BY 4.0 và thay đổi |
+| Benchmark ≥20 câu, tách 15 dev/5 test | `benchmark/questions.json`, `benchmark/README.md`, hash và thời điểm chốt trước chạy trong experiment log |
+| Embedding thật, store bền vững, metadata filter | `starter/src/`, cấu hình/requirements và `results/environment.json`; BGE 384 chiều, pgvector exact cosine, filter section |
+| Ba cấu hình và so sánh có kiểm soát | `artifacts/strategies.json`, `artifacts/experiment_log.csv`; B–C chỉ thay filter |
+| Top-3, dev/test metrics, thời gian và chi phí | Hai file trace (45 dev + 15 test), `metrics.csv`, `ingest_stats.csv`, `frozen_inputs.json`, `selection.json` |
+| Audit và phân tích năm khía cạnh | 90 nhãn có lý do/phương pháp, học viên đã xem xét; `review_labels.json`, `audit_summary.csv` và mục 3–5 của báo cáo |
+| Hướng dẫn tái lập, báo cáo và log | `RUNNING.md`, báo cáo cá nhân này, `results/errors.json` là log setup thật |
+| Secret và quyền chia sẻ | `.env`, venv, model cache không đưa vào commit; nguồn PDF có giấy phép và attribution |
+| Push, quyền truy cập người chấm, nộp link | Thực hiện theo kênh lớp bên ngoài repo; hồ sơ local không tự chứng minh đã nộp |

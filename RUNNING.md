@@ -54,7 +54,7 @@ Lần đầu FastEmbed tải khoảng 67 MB model vào `.cache/models/`; các l�
 - `results/errors.json`: log setup thật còn giữ từ lịch sử backend trước khi chuyển corpus; không phải lỗi giả hoặc lỗi trích xuất PDF mới.
 - `artifacts/experiment_log.csv`: giả thuyết và thời điểm chốt trước truy xuất, hash benchmark và số đo sau chạy.
 
-Không xuất file chunk snapshot hoặc review input trùng lặp. Lần chạy lại chỉ tái sử dụng nhãn có ngữ cảnh không đổi; mẫu thay đổi cần chấm lại. Audit PDF là **AI-assisted**, không dùng xác nhận audit HTML trước đây để giả định học viên đã xác nhận nhãn PDF. Sau khi xem xét/sửa nhãn có chủ đích, tổng hợp bằng:
+Không xuất file chunk snapshot hoặc review input trùng lặp. Lần chạy lại chỉ tái sử dụng nhãn có ngữ cảnh không đổi; mẫu thay đổi cần chấm lại. Audit PDF là **AI-assisted** và học viên đã xác nhận kiểm tra kết quả cùng các nhãn PDF hiện có. Người xác nhận, căn cứ và thời điểm ghi nhận nằm trong `review_metadata` của `results/review_labels.json`. Khi có chỉnh nhãn có chủ đích, tổng hợp bằng:
 
 ```powershell
 python -m starter.src.audit

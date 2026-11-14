@@ -12,7 +12,7 @@
       "score": 1,
       "reason": "Starts with a cut introduction and ends inside the sequence-to-sequence explanation; self-attention definition remains understandable.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -26,7 +26,7 @@
       "score": 1,
       "reason": "Begins inside the task-prefix sentence and truncates the MNLI condition; translation example is understandable but incomplete context remains.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -40,7 +40,7 @@
       "score": 1,
       "reason": "Checkpoint text begins mid-sentence and vocabulary explanation is cut; individual statements remain partly understandable.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -54,7 +54,7 @@
       "score": 1,
       "reason": "Starts inside a figure/formula explanation without defining all symbols and truncates the causal-mask condition.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -68,7 +68,7 @@
       "score": 1,
       "reason": "Cuts prior architectural discussion and ends in the objectives citation list; central role of unsupervised objectives remains readable.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -82,7 +82,7 @@
       "score": 1,
       "reason": "Starts inside a caption and cuts the conclusion about span length 10; only part of the comparison survives.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -96,7 +96,7 @@
       "score": 1,
       "reason": "The initial effects reference lacks its preceding context and the last larger-model caveat is cut.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -110,7 +110,7 @@
       "score": 1,
       "reason": "The equal-mixing label and sentence beginning are absent; underfitting/overfitting statement remains but the next protocol is cut.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -124,7 +124,7 @@
       "score": 1,
       "reason": "Starts mid-word and ends before explaining repeated-data harm; some training-scale facts remain readable.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "A",
@@ -138,7 +138,7 @@
       "score": 1,
       "reason": "Starts in the ROUGE comparison and cuts the final caveat; meaningful cautions remain but the paragraph is incomplete.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -152,7 +152,7 @@
       "score": 2,
       "reason": "Complete paragraph introduces self-attention and architectural variants, including its subject and motivation.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -166,7 +166,7 @@
       "score": 1,
       "reason": "Translation and classification examples are readable, but the invalid-label condition is cut before its consequence.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -180,7 +180,7 @@
       "score": 2,
       "reason": "Full vocabulary paragraph gives tokenizer, size, multilingual mixture and limitations; the following heading does not cut an idea.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -194,7 +194,7 @@
       "score": 1,
       "reason": "Mask symbols are introduced on the preceding source page; this chunk starts mid-definition although the mask and next architecture are partly understandable.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -208,7 +208,7 @@
       "score": 1,
       "reason": "The paragraph introduces unsupervised objectives but ends inside the input-sequence processing explanation.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -222,7 +222,7 @@
       "score": 2,
       "reason": "Complete Figure 5 caption explains the sequence of objective comparisons and corresponding sections without truncation.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -236,7 +236,7 @@
       "score": 1,
       "reason": "The paragraph is complete but its opening effects reference depends on the preceding dataset-size results; the recommendation is only partly self-contained.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -250,7 +250,7 @@
       "score": 2,
       "reason": "Complete table caption and equal-mixing paragraph describe strategy, overfitting/underfitting and intended comparison.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -264,7 +264,7 @@
       "score": 1,
       "reason": "Begins with the Longer training label but cuts the final data-repetition rationale mid-word.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "B",
@@ -278,7 +278,7 @@
       "score": 2,
       "reason": "Complete summarization paragraph explains ROUGE limitations, extractive baselines and observed summary quality.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -292,7 +292,7 @@
       "score": 2,
       "reason": "Complete paragraph introduces self-attention and architectural variants, including its subject and motivation.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -306,7 +306,7 @@
       "score": 1,
       "reason": "Translation and classification examples are readable, but the invalid-label condition is cut before its consequence.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -320,7 +320,7 @@
       "score": 2,
       "reason": "Full vocabulary paragraph gives tokenizer, size, multilingual mixture and limitations; the following heading does not cut an idea.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -334,7 +334,7 @@
       "score": 1,
       "reason": "Mask symbols are introduced on the preceding source page; this chunk starts mid-definition although the mask and next architecture are partly understandable.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -348,7 +348,7 @@
       "score": 1,
       "reason": "The paragraph introduces unsupervised objectives but ends inside the input-sequence processing explanation.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -362,7 +362,7 @@
       "score": 2,
       "reason": "Complete Figure 5 caption explains the sequence of objective comparisons and corresponding sections without truncation.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -376,7 +376,7 @@
       "score": 1,
       "reason": "The paragraph is complete but its opening effects reference depends on the preceding dataset-size results; the recommendation is only partly self-contained.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -390,7 +390,7 @@
       "score": 2,
       "reason": "Complete table caption and equal-mixing paragraph describe strategy, overfitting/underfitting and intended comparison.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -404,7 +404,7 @@
       "score": 1,
       "reason": "Begins with the Longer training label but cuts the final data-repetition rationale mid-word.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     },
     {
       "strategy": "C",
@@ -418,7 +418,7 @@
       "score": 2,
       "reason": "Complete summarization paragraph explains ROUGE limitations, extractive baselines and observed summary quality.",
       "reviewer": "Codex",
-      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. No independent human confirmation for this PDF corpus yet."
+      "method": "AI-assisted reading of each sampled chunk against its PDF-page context using GUIDE 0/1/2 rubric. B/C have identical sampled chunks, so identical judgements are reused. Subsequent student confirmation of PDF results/audit is recorded in review_metadata; not a blinded independent review."
     }
   ],
   "grounding": [
@@ -1719,7 +1719,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 6, source URL, section membership ['2. Setup'] and source span [1350,1850); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1759,7 +1759,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 27, source URL, section membership ['3. Experiments'] and source span [0,500); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1799,7 +1799,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 25, source URL, section membership ['3. Experiments'] and source span [2250,2750); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1839,7 +1839,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 12, source URL, section membership ['3. Experiments'] and source span [900,1400); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1879,7 +1879,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 12, source URL, section membership ['3. Experiments'] and source span [1350,1850); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1919,7 +1919,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 37, source URL, section membership ['3. Experiments'] and source span [2250,2750); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1959,7 +1959,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 17, source URL, section membership ['3. Experiments'] and source span [0,500); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -1999,7 +1999,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 16, source URL, section membership ['3. Experiments'] and source span [450,950); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2039,7 +2039,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 17, source URL, section membership ['3. Experiments'] and source span [2700,3200); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2079,7 +2079,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 30, source URL, section membership ['3. Experiments'] and source span [0,500); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2119,7 +2119,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 30, source URL, section membership ['3. Experiments'] and source span [450,950); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2159,7 +2159,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 29, source URL, section membership ['3. Experiments'] and source span [450,950); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2199,7 +2199,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [2700,3200); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2239,7 +2239,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [3150,3650); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "A",
@@ -2279,7 +2279,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 37, source URL, section membership ['3. Experiments'] and source span [3150,3440); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2319,7 +2319,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 6, source URL, section membership ['2. Setup'] and source span [1398,2118); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2359,7 +2359,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 25, source URL, section membership ['3. Experiments'] and source span [1774,2448); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2399,7 +2399,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 25, source URL, section membership ['3. Experiments'] and source span [2450,3284); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2439,7 +2439,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 12, source URL, section membership ['3. Experiments'] and source span [859,1703); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2479,7 +2479,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 37, source URL, section membership ['3. Experiments'] and source span [1878,2878); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2519,7 +2519,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 13, source URL, section membership ['3. Experiments'] and source span [1699,2699); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2559,7 +2559,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 17, source URL, section membership ['3. Experiments'] and source span [0,418); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2599,7 +2599,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 16, source URL, section membership ['3. Experiments'] and source span [0,942); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2639,7 +2639,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 17, source URL, section membership ['3. Experiments'] and source span [3140,3860); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2679,7 +2679,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 30, source URL, section membership ['3. Experiments'] and source span [0,634); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2719,7 +2719,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 29, source URL, section membership ['3. Experiments'] and source span [730,1547); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2759,7 +2759,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 30, source URL, section membership ['3. Experiments'] and source span [636,1636); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2799,7 +2799,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [2461,3449); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2839,7 +2839,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [866,1715); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "B",
@@ -2879,7 +2879,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [3451,3804); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -2919,7 +2919,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 6, source URL, section membership ['2. Setup'] and source span [1398,2118); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -2959,7 +2959,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 25, source URL, section membership ['3. Experiments'] and source span [1774,2448); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -2999,7 +2999,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 25, source URL, section membership ['3. Experiments'] and source span [2450,3284); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3039,7 +3039,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 12, source URL, section membership ['3. Experiments'] and source span [859,1703); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3079,7 +3079,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 37, source URL, section membership ['3. Experiments'] and source span [1878,2878); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3119,7 +3119,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 13, source URL, section membership ['3. Experiments'] and source span [1699,2699); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3159,7 +3159,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 17, source URL, section membership ['3. Experiments'] and source span [0,418); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3199,7 +3199,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 16, source URL, section membership ['3. Experiments'] and source span [0,942); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3239,7 +3239,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 17, source URL, section membership ['3. Experiments'] and source span [3140,3860); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3279,7 +3279,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 30, source URL, section membership ['3. Experiments'] and source span [0,634); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3319,7 +3319,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 29, source URL, section membership ['3. Experiments'] and source span [730,1547); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3359,7 +3359,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 30, source URL, section membership ['3. Experiments'] and source span [636,1636); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3399,7 +3399,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [2461,3449); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3439,7 +3439,7 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [866,1715); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     },
     {
       "strategy": "C",
@@ -3479,17 +3479,20 @@
       "manual_correct": true,
       "reason": "Checked PDF physical page 40, source URL, section membership ['3. Experiments'] and source span [3451,3804); metadata matches the selected PDF page. No metadata discrepancy found.",
       "reviewer": "Codex",
-      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; not an independent human audit."
+      "method": "AI-assisted review of each displayed metadata record with deterministic URL/page/section/text-span comparison. Section boundaries were checked against headings on PDF pages 4 and 10; initial annotation was AI-assisted; subsequent student confirmation is recorded in review_metadata."
     }
   ],
   "review_metadata": {
     "reviewer": "Codex",
     "annotation_status": "AI-assisted review completed",
-    "human_review_status": "pending",
+    "human_review_status": "confirmed_by_student",
     "annotated_at": "2026-11-14T05:32:05.843992+00:00",
-    "scope": "New T5 PDF corpus only. Previous student confirmation concerned the HTML corpus and is not transferred.",
-    "bias": "Same assistant prepared pipeline/questions and annotated results; no blinded independent reviewer. Coherence positions fixed before retrieval, including captions/tables.",
+    "scope": "Current T5 PDF corpus, experimental results and existing audit labels.",
+    "bias": "AI assisted initial pipeline, questions and annotation; the student subsequently confirmed reviewing PDF results and audit. No blinded independent inter-rater agreement study.",
     "benchmark_limitation": "q08 does not explicitly distinguish baseline 5000-step checkpoints from final T5 1000-step checkpoints; gold/questions remain frozen after test.",
-    "test_tuning": "No corpus, model, chunking configuration, question, split, gold or ranking changes after this PDF test run."
+    "test_tuning": "No corpus, model, chunking configuration, question, split, gold or ranking changes after this PDF test run.",
+    "human_reviewer": "Hồ Nguyễn Minh Sang",
+    "confirmation_recorded_at": "2026-11-14T05:50:45.921780+00:00",
+    "confirmation_basis": "Student explicitly confirmed in the current conversation that PDF experimental results and audit had been checked; no score corrections requested."
   }
 }
