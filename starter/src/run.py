@@ -16,7 +16,7 @@ def main() -> None:
     parser.add_argument('--allow-rerun', action='store_true', help='Acknowledge that test was already exposed')
     parser.add_argument('--question', help='Retrieval query; never include gold evidence')
     parser.add_argument('--strategy', choices=['A', 'B', 'C'], default='C')
-    parser.add_argument('--chapter', help='User-provided chapter filter, only for C')
+    parser.add_argument('--section', help='User-provided PDF main-section filter, only for C')
     args = parser.parse_args()
     load_dotenv(ROOT / 'starter/.env')
     try:
@@ -34,7 +34,7 @@ def main() -> None:
             from .store import PgVectorStore
             if not args.question or not args.question.strip():
                 raise ValueError('query requires --question')
-            if args.chapter and args.strategy != 'C':
+            if args.section and args.strategy != 'C':
                 raise ValueError('Only strategy C applies metadata filters')
             if not (RESULTS / 'environment.json').exists():
                 raise ValueError('Run experiment successfully before querying')
@@ -43,7 +43,7 @@ def main() -> None:
             if saved['files_sha256'] != model_info(embedder)['files_sha256']:
                 raise ValueError('Embedding model files differ from the stored experiment')
             store = PgVectorStore(url, embedder.dimensions)
-            filters = {'chapter': args.chapter} if args.chapter else None
+            filters = {'section': args.section} if args.section else None
             hits = store.search(args.strategy, embedder.embed_query(args.question), filters=filters)
             print(json.dumps(hits, ensure_ascii=False, indent=2))
     except Exception as exc:

@@ -1,93 +1,82 @@
-# Hướng dẫn chạy bài làm Day 06
+# Chạy bài lab với corpus PDF T5
 
-## Bài triển khai trong repo này
+## Corpus và cấu hình
 
-**Stack:** Python + PostgreSQL 16/pgvector theo starter; embedding thật chạy local bằng FastEmbed/ONNX với `BAAI/bge-small-en-v1.5` (384 chiều). Không cần API key. Groq không được dùng trong thí nghiệm bắt buộc vì bài này đánh giá truy xuất evidence, không yêu cầu chatbot.
+Nguồn duy nhất là paper **Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer**, Raffel và cộng sự, JMLR 21(140), 2020. PDF có 67 trang; bài dùng **trang vật lý 4–40, tổng 37 trang**, 118.237 ký tự đã chuẩn hóa. Đây là phần Setup và Experiments, có nội dung liên quan trên từng trang, không tính bìa/mục lục/trang trắng/tài liệu tham khảo. Manifest liệt kê trang chọn/loại, lý do, số ký tự, hash và thời điểm tải. `page` luôn là số trang thật, không đánh số lại từ 1.
 
-**Corpus:** 6 chương Python 3.13 Tutorial, 42 đơn vị nguồn HTML hợp lệ, 155.072 ký tự. Mỗi đơn vị ít nhất 1.500 ký tự; `page` là ID đơn vị trong chương. Nguồn, ranh giới, hash và quyền sử dụng nằm ở [manifest](data/manifest.json), [ghi công](data/ATTRIBUTION.md) và [giấy phép](data/LICENSE_PYTHON.txt). Có sẵn snapshot nên không cần tải lại corpus.
+PDF gốc ở `data/raw/t5_jmlr_2020.pdf`; giấy phép **CC BY 4.0** in trên trang 1. Xem [ghi công và thay đổi](data/ATTRIBUTION.md), [manifest](data/manifest.json) và [benchmark](benchmark/README.md). PDF chỉ là tài liệu nguồn; embedding vẫn dùng **BAAI/bge-small-en-v1.5**, 384 chiều, FastEmbed/ONNX CPU local. Không cần API key.
 
-### Setup và chạy trên Windows PowerShell
+| Cấu hình | Chunking | Filter |
+|---|---|---|
+| A | Cố định 500 ký tự, overlap 50 | Không |
+| B | Gom theo đoạn, tối đa 1.000 ký tự, không overlap | Không |
+| C | Giữ nguyên chunk và vector của B | `section` nếu câu hỏi cung cấp phạm vi |
 
-Chạy từ **root repo**, cần Python 3.11–3.14 và Docker Desktop đang chạy Linux containers:
+PostgreSQL 16/pgvector lưu vector bền vững, cosine exact search, không dùng approximate index. A–B thay chính sách chunking; B–C chỉ thêm filter. `section` là danh sách tiêu đề thật: `2. Setup` hoặc `3. Experiments`. Trang 10 thuộc cả hai; backend chuyển filter chuỗi thành JSONB array containment nên trang chuyển tiếp vẫn được tìm trong cả hai phạm vi.
+
+## Chạy từ đầu
+
+Từ root repo, Windows PowerShell, cần Docker Desktop chạy Linux containers:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r starter\requirements.lock.txt
-if (!(Test-Path starter\.env)) { Copy-Item starter\.env.example starter\.env }
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r starter/requirements.lock.txt
+if (!(Test-Path starter/.env)) { Copy-Item starter/.env.example starter/.env }
 docker compose -f starter/docker-compose.yml -p day6_student_starter up -d --wait
-.\.venv\Scripts\python.exe starter\scripts\check_setup.py
-.\.venv\Scripts\python.exe -m starter.src.run validate
-.\.venv\Scripts\python.exe -m starter.src.run experiment
+python starter/scripts/check_setup.py
+python -m starter.src.corpus
+python -m starter.src.run validate
+python -m starter.src.run experiment
 ```
 
-Lần dùng đầu FastEmbed tải model ONNX khoảng 67 MB và tokenizer vào `.cache/models/`; sau đó chạy local. `.env` chỉ chứa cấu hình database local, không commit. `requirements.lock.txt` cố định phiên bản trực tiếp và runtime đã dùng; môi trường/thông tin hash model thực tế được ghi trong `results/environment.json`. Điện và phần cứng không được quy đổi thành chi phí API.
+Snapshot PDF đã có sẵn. `corpus` trích xuất và tạo lại `data/pages.json`, `data/manifest.json` bằng pypdf; không OCR. `validate` kiểm tra hash, tái trích xuất PDF để đối chiếu toàn bộ text/metadata, rồi kiểm chứng evidence, split và filter. Có lỗi trích xuất/nguồn thiếu thì báo lỗi rõ ràng.
 
-Từ thư mục `starter/`, lệnh tương đương là `..\.venv\Scripts\python.exe -m src.run`. Với Linux/macOS, dùng `.venv/bin/python` từ root và cú pháp copy/biến môi trường tương ứng.
-
-### Thí nghiệm và kết quả
-
-| Cấu hình | Chunking | Metadata filter |
-|---|---|---|
-| A | Fixed 500 ký tự, overlap 50 | Không |
-| B | Gom theo đoạn, tối đa 1.000 ký tự | Không |
-| C | Giữ nguyên chunk và vector của B | Lọc `chapter` nếu câu hỏi cung cấp |
-
-Đo cosine **exact** trong PostgreSQL; không dùng approximate vector index. Các cấu hình giữ nguyên corpus/model/query/benchmark. B–C chỉ đổi filter; A–B đổi chính sách chunking (bao gồm kích thước và overlap), vì vậy không tách riêng tác động của từng tham số chunking. BGE dùng query prefix khuyến nghị, document không prefix; ONNX quantized do FastEmbed cung cấp, giới hạn 512 token. Số chunk vượt giới hạn được ghi trong ingest stats.
-
-Benchmark có **15 dev / 5 test**, 4 câu filter (2 test), evidence đã kiểm chứng. Quy tắc chọn cấu hình: dev Hit@3 → dev Hit@1 → ít chunk hơn → thứ tự tên. Pipeline ghi `selection.json` trước khi đọc kết quả test. [Phương pháp benchmark](benchmark/README.md).
-
-Sau lần chạy đầu có bổ sung nguồn gold hợp lệ cho q12 và chỉ chấm lại trace đã lưu. Kết quả gốc được giữ; đây không phải một holdout độc lập mới. Xem [nhật ký hiệu chỉnh](benchmark/AMENDMENTS.md).
-
-- `results/metrics.csv`: Hit@1/Hit@3 theo split, có tử/mẫu.
-- `results/traces_dev.json`, `traces_test.json`: toàn bộ top-3, text, score, metadata, filter và gold.
-- `results/ingest_stats.csv`: số chunk, độ dài, token, thời gian, chi phí và kiểm tra nạp lại.
-- `results/frozen_inputs.json`, `environment.json`: cấu hình, hash, phiên bản, model và thời điểm.
-- `results/review_labels.json`, `audit_summary.csv`: 90 mẫu coherence, metadata, grounding kèm ngữ cảnh, nhãn, lý do và bảng tổng hợp.
-- `results/selection.json`: lựa chọn cấu hình trên dev; `results/scoring_amendment.json` và `results/original_scoring/` lưu lịch sử hiệu chỉnh q12 cùng điểm/trace trước hiệu chỉnh.
-- `artifacts/experiment_log.csv`: giả thuyết và kết quả ba cấu hình.
-- `report/individual/`: báo cáo phân tích, lỗi và giới hạn.
-
-Các nhãn do Codex hỗ trợ đọc/chấm được ghi rõ là **AI-assisted**. Học viên đã xác nhận xem xét audit; căn cứ xác nhận được ghi trong `review_metadata` của `results/review_labels.json`. Đây không phải chấm mù độc lập. Hit@3 không thay cho grounding/coherence và không phải độ chính xác câu trả lời LLM.
-
-Lệnh `experiment` từ chối ghi đè khi test đã được đánh giá. Muốn chạy lại có chủ đích, sao lưu `results/` trước và dùng `--allow-rerun`; kết quả chạy lại không được mô tả là một holdout độc lập mới. Nếu chỉnh corpus/config/model sau khi đọc test, cần bộ test mới để có đánh giá độc lập.
-
-Đầu ra audit được lưu gọn trong `review_labels.json`; không xuất thêm bản chunk snapshot và ba file review inputs trùng lặp. Khi chạy lại, chỉ giữ nhãn cho mẫu có ngữ cảnh nguồn/kết quả truy xuất không đổi. Mẫu thay đổi cần chấm lại và trạng thái review trở về `pending`; bảng tổng hợp audit cũ bị bỏ nếu còn nhãn chưa hoàn thành. Vì vậy luôn sao lưu trước khi chạy lại có thay đổi dữ liệu/cấu hình.
-
-### Truy xuất thử và kiểm thử
-
-#### Web demo local
-
-Sau khi database có kết quả experiment, từ root repo và venv đã bật:
+Lệnh `experiment` từ chối ghi đè khi `selection.json` đã tồn tại. Muốn chủ động chạy lại, sao lưu `results/` ra ngoài repo rồi dùng:
 
 ```powershell
-python -m starter.src.demo
+python -m starter.src.run experiment --allow-rerun
 ```
 
-Mở **http://127.0.0.1:8000**. Có thể đổi cổng bằng `--port 8001`; dừng bằng Ctrl+C. Web dùng thư viện HTTP có sẵn của Python, không cần cài frontend hoặc thêm dependency. Demo đọc pgvector trực tiếp, chỉ embedding câu hỏi; không ingest lại hoặc ghi đè artifact trong `results/`. Nếu model/database lỗi, web báo lỗi rõ ràng.
+Chạy lại trên bộ test đã xem là tái lập, không phải test độc lập mới. Không đổi corpus/model/config/gold để cải thiện điểm sau khi đã đọc test. Khi cần cập nhật PDF có chủ đích: `python -m starter.src.corpus --download`; việc này cập nhật thời điểm tải và có thể đổi hash, nên phải chốt lại benchmark trước thử nghiệm mới.
 
-Nhập câu hỏi, chọn A/B/C hoặc so sánh cả ba. Chương là input do người dùng chọn trước; chỉ C áp dụng filter, A/B luôn tìm toàn corpus. Mỗi cấu hình hiển thị top-3, cosine score, text, URL và metadata. `page` là đơn vị nguồn HTML. Cosine không phải xác suất đúng; demo không tự chấm câu hỏi mới bằng benchmark gold.
+Lần đầu FastEmbed tải khoảng 67 MB model vào `.cache/models/`; các lần sau dùng cache. Cùng model, prefix query, tokenizer, metric, corpus và benchmark được giữ giữa A/B/C. Query thêm prefix BGE khuyến nghị, document không thêm prefix. Chi phí API là 0 USD; điện/phần cứng không được quy đổi. Không commit `.env`, model cache hoặc venv.
 
-Sau truy vấn, mục **Luồng retrieval** hiển thị input thật có query prefix, model, số chiều, 8 giá trị vector đầu, chuẩn L2, thời gian embedding và filter/thời gian tìm vector của từng cấu hình. Các số đo được trả sau khi truy vấn hoàn tất, không phải mô phỏng tiến trình thời gian thực. Lần đầu có thêm thời gian nạp model và kiểm tra hash; tổng thời gian có thể gồm chờ khóa model.
+## Đọc kết quả và audit
 
-Tab **Kết quả experiment đã lưu** đọc các file có sẵn trong `results/`: metrics thành bảng dev/test; ingest stats thành bảng tài nguyên; trace chọn theo câu hỏi để so sánh A/B/C với gold và thứ hạng hit; audit có nhãn, lý do, ngữ cảnh và phương pháp. Có thể xem selection, môi trường, frozen inputs và lịch sử hiệu chỉnh q12. Nhãn `pending` được giữ đúng như file, không tự xác nhận thay học viên. Các file `original_scoring/` được ghi rõ là trước hiệu chỉnh. Nút **Đọc lại file** tải lại nội dung từ đĩa; lỗi hoặc file thiếu được báo rõ, không điền số liệu giả.
+- `results/metrics.csv`: Hit@1/Hit@3, tử/mẫu, riêng dev/test.
+- `results/traces_dev.json`, `traces_test.json`: 45 dev + 15 test trace, mỗi trace top-3 gồm text, cosine score, metadata, gold, hit ranks và filter thực tế.
+- `results/ingest_stats.csv`: chunk count, min/median/max độ dài, tổng ký tự/token, thời gian, chi phí và số bản ghi trước/sau nạp lại.
+- `results/environment.json`: phiên bản runtime/backend, hash model, prefix và số chiều.
+- `results/frozen_inputs.json`: hash các input và quy tắc chọn chốt trước khi truy xuất.
+- `results/selection.json`: chọn trên dev trước khi đánh giá test.
+- `results/review_labels.json`, `audit_summary.csv`: 30 coherence + 45 metadata + 15 grounding, nhãn/lý do/phương pháp và bảng tổng hợp.
+- `results/errors.json`: log setup thật còn giữ từ lịch sử backend trước khi chuyển corpus; không phải lỗi giả hoặc lỗi trích xuất PDF mới.
+- `artifacts/experiment_log.csv`: giả thuyết và thời điểm chốt trước truy xuất, hash benchmark và số đo sau chạy.
 
-Web chỉ thực hiện semantic retrieval bằng embedding local và pgvector; không gọi API sinh câu trả lời và không cần API key. Đây là phần trình bày bổ sung, không phải hybrid retrieval và không thay nhãn grounding/metrics của lab. Server chỉ bind localhost, dành cho demo trên máy cá nhân.
-
-#### CLI và kiểm thử
+Không xuất file chunk snapshot hoặc review input trùng lặp. Lần chạy lại chỉ tái sử dụng nhãn có ngữ cảnh không đổi; mẫu thay đổi cần chấm lại. Audit PDF là **AI-assisted**, không dùng xác nhận audit HTML trước đây để giả định học viên đã xác nhận nhãn PDF. Sau khi xem xét/sửa nhãn có chủ đích, tổng hợp bằng:
 
 ```powershell
-.\.venv\Scripts\python.exe -m starter.src.run query --strategy C --chapter errors --question "Does finally run without an exception?"
-.\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider
+python -m starter.src.audit
 ```
 
-Kiểm thử tích hợp thật (sau setup, trong PowerShell):
+Coherence/grounding là đánh giá định tính riêng, không lấy Hit@3 thay thế. Grounding xét cả top-3; một hit tự động yêu cầu đủ evidence trong một chunk. Không có chatbot hoặc điểm độ chính xác câu trả lời sinh.
+
+## Truy xuất thử và kiểm thử
+
+```powershell
+python -m starter.src.run query --strategy C --section "2. Setup" --question "How does the text-to-text framework specify a task?"
+python -m pytest -q -p no:cacheprovider
+```
+
+Kiểm thử đầy đủ với model local và database thật, sau setup:
 
 ```powershell
 $env:RUN_LOCAL_MODEL = "1"
 $env:HF_HUB_OFFLINE = "1"
-.\.venv\Scripts\python.exe -c "import os,pytest; from dotenv import load_dotenv; load_dotenv('starter/.env'); os.environ['TEST_DATABASE_URL']=os.environ['DATABASE_URL']; raise SystemExit(pytest.main(['-q','-p','no:cacheprovider']))"
+python -c "import os,pytest; from dotenv import load_dotenv; load_dotenv('starter/.env'); os.environ['TEST_DATABASE_URL']=os.environ['DATABASE_URL']; raise SystemExit(pytest.main(['-q','-p','no:cacheprovider']))"
 ```
 
-Tái tạo corpus từ snapshot: `python -m starter.src.corpus`. Chỉ dùng thêm `--download` khi muốn cập nhật nguồn có chủ đích; cập nhật sẽ thay hash và có thể làm gold cũ không còn hợp lệ. Tổng hợp lại các nhãn đã chấm: `python -m starter.src.audit`.
+Database dùng volume `day6_student_starter_pg_data`, cổng `127.0.0.1:55433`. Nạp lại thay snapshot A/B/C trong transaction, loại chunk cũ của corpus HTML và không nhân đôi. Dừng mà giữ dữ liệu: `docker compose -f starter/docker-compose.yml -p day6_student_starter stop`. Không xóa volume để chữa lỗi kết nối.
 
-Docker Compose dùng cổng `127.0.0.1:55433` và volume riêng `day6_student_starter_pg_data`. Dừng mà giữ dữ liệu: `docker compose -f starter/docker-compose.yml -p day6_student_starter stop`. Không xóa volume để xử lý lỗi kết nối. Khi Docker engine lỗi 500, kiểm tra Docker Desktop/WSL. `results/errors.json` giữ log lỗi thật đã được loại thông tin kết nối nhạy cảm, theo yêu cầu ghi lỗi của GUIDE; không tự tạo lỗi hoặc log để bổ sung bài nộp.
+Phần web demo tạm bỏ theo yêu cầu; dùng CLI và các file kết quả để trình bày. Pipeline và số liệu HTML cũ chỉ còn trong commit trước, không trộn với kết quả PDF.

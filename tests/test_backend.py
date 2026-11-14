@@ -24,8 +24,8 @@ def test_pgvector_persistence_filter_and_snapshot_replacement():
     from starter.src.models import Chunk
     store = PgVectorStore(url, 3)
     store.create_schema()
-    chunks = [Chunk('unit-a', 'doc', 'source', 1, 'old', {'chapter': 'a'}),
-              Chunk('unit-b', 'doc', 'source', 2, 'new', {'chapter': 'b'})]
+    chunks = [Chunk('unit-a', 'doc', 'source', 1, 'old', {'chapter': 'a', 'section': ['2. Setup', '3. Experiments']}),
+              Chunk('unit-b', 'doc', 'source', 2, 'new', {'chapter': 'b', 'section': ['3. Experiments']})]
     strategy = 'pytest-integration'
     try:
         store.upsert(strategy, chunks, [[1, 0, 0], [0, 1, 0]])
@@ -33,8 +33,13 @@ def test_pgvector_persistence_filter_and_snapshot_replacement():
         store.upsert(strategy, chunks, [[1, 0, 0], [0, 1, 0]])
         assert store.count(strategy) == 2
         reloaded = PgVectorStore(url, 3)
-        hits = reloaded.search(strategy, [1, 0, 0], filters={'chapter': 'b'})
+        hits = reloaded.search(strategy, [1, 0, 0], filters={'chapter': 'b', 'section': '3. Experiments'})
         assert len(hits) == 1 and hits[0]['chunk_id'] == 'unit-b'
+        section_hits = reloaded.search(strategy, [1, 0, 0], filters={'section': '2. Setup'})
+        assert [h['chunk_id'] for h in section_hits] == ['unit-a']
+        assert reloaded.search(strategy, [1, 0, 0], filters={'section': 'invented'}) == []
+        with pytest.raises(ValueError, match='Unsupported metadata filter'):
+            reloaded.search(strategy, [1, 0, 0], filters={'section': ['3. Experiments']})
         with pytest.raises(ValueError):
             store.upsert(strategy, chunks[:1], [[float('nan'), 0, 0]])
         assert store.count(strategy) == 2

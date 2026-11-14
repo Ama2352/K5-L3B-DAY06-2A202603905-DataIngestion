@@ -4,11 +4,18 @@ from .evaluation import evidence_text, golds
 from .models import DocumentPage
 
 
+def matches_filter(metadata, filters):
+    return all(v in metadata.get(k, []) if isinstance(metadata.get(k), list) else metadata.get(k) == v
+               for k, v in filters.items())
+
+
 def validate_benchmark(pages: list[DocumentPage], questions: list[dict]) -> dict:
     lookup = {(p.document_id, p.page): p for p in pages}
     if len(lookup) != len(pages) or len(pages) < 30:
         raise ValueError('Require at least 30 unique source units')
-    if any(len(p.text) < 1500 for p in pages):
+    if any(not p.text.strip() for p in pages):
+        raise ValueError('Source pages must contain useful text')
+    if any(len(p.text) < 1500 for p in pages if p.metadata.get('page_kind') != 'pdf'):
         raise ValueError('HTML source units must have at least 1500 normalized characters')
     counts = Counter(q['split'] for q in questions)
     if counts['dev'] < 15 or counts['test'] < 5 or set(counts) - {'dev', 'test'}:
@@ -28,14 +35,14 @@ def validate_benchmark(pages: list[DocumentPage], questions: list[dict]) -> dict
                 raise ValueError(f'Gold evidence not found: {q["id"]}')
         filters = q.get('filter', {})
         if filters:
-            if set(filters) - {'chapter', 'language', 'version'}:
+            if set(filters) - {'section', 'chapter', 'language', 'version', 'year'} or any(not isinstance(v, str) for v in filters.values()):
                 raise ValueError('Unsupported filter key')
             if not q.get('filter_origin'):
                 raise ValueError('Filter origin must be documented')
-            if not any(all(p.metadata.get(k) == v for k, v in filters.items()) for p in pages):
+            if not any(matches_filter(p.metadata, filters) for p in pages):
                 raise ValueError('Filter value absent from source metadata')
             gold_page = lookup[(q['gold_source_id'], q['gold_page'])]
-            if not all(gold_page.metadata.get(k) == v for k, v in filters.items()):
+            if not matches_filter(gold_page.metadata, filters):
                 raise ValueError('Filter excludes gold evidence')
             filter_count += 1
             filter_test += q['split'] == 'test'

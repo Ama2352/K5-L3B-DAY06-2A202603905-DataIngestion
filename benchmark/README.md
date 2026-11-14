@@ -1,13 +1,13 @@
-# Benchmark cố định trước truy xuất
+# Fixed benchmark for the T5 PDF corpus
 
-`questions.json` có 20 câu bằng tiếng Anh để khớp corpus và model tiếng Anh: 15 dev, 5 test. Test cố định: q04, q08, q12, q16, q20. Câu có filter: q06, q11, q16, q20; giá trị chương được nêu ngay trong câu hỏi, không suy ra từ đáp án sau truy xuất.
+20 English questions grounded in the JMLR 2020 T5 paper, physical PDF pages 4-40. Split fixed before retrieval: 15 dev and 5 test (q04, q08, q12, q16, q20). Scope filters are explicitly in questions q06/q11 (Setup, dev) and q16/q20 (Experiments, test). section values come from actual main headings; mixed page 10 belongs to both sections. No filter is inferred from a gold answer/page after retrieval.
 
-Mỗi câu có đáp án, nguồn, ID đơn vị và nguyên đoạn evidence đã đối chiếu trong `data/pages.json`. Bộ câu hỏi được AI hỗ trợ soạn và kiểm tra với nguồn. Tác giả cần đọc lại trước khi nộp.
+Questions include direct facts, paraphrases and conditions/exceptions. Evidence is an exact normalized source excerpt, verified before the first PDF experiment. Exact repeated evidence locations are listed as alternative_gold where present. Dev/test share one paper and some topics, so this is not a document-disjoint test; only five test questions give limited evidence.
 
-Quy tắc chọn đã chốt: ưu tiên dev Evidence Hit@3, sau đó Hit@1, sau đó ít chunk hơn, cuối cùng thứ tự tên cấu hình. Lưu `results/selection.json` trước khi chạy test. Không chọn theo test và không dùng gold trong query/filter. Câu hỏi được chia theo ID để phủ nhiều chương; các chương xuất hiện ở cả dev và test nên còn nguy cơ tương đồng chủ đề. Tập 5 test nhỏ không cho phép suy rộng.
+Selection rule fixed before retrieval: dev Evidence Hit@3, then Hit@1, fewer chunks, strategy name. The pipeline persists selection before evaluating test. Gold and configs are held fixed across A/B/C; no tuning or gold changes after viewing PDF test results.
 
-Hit cần đúng nguồn **và** đơn vị nguồn, đồng thời chứa đủ evidence trong một chunk. So khớp không phân biệt hoa/thường, chuẩn hóa Unicode và khoảng trắng. Đây là cách chấm tự động bảo thủ: bằng chứng tương đương chưa ghi trong gold có thể bị tính miss; xem trace để phân tích, không đổi gold sau khi xem test nhằm tăng điểm.
+Coherence locations are predetermined physical pages 4,8,12,16,20,24,28,32,36,40, offset at each normalized page midpoint. Pick the earliest-start chunk covering the location when overlap yields multiple candidates. The sample spans the selected range but can land in figures or tables; report this limitation.
 
-`coherence_locations.json` chọn trước 10 đơn vị đầu theo `(document_id, page)`, lấy vị trí giữa mỗi đơn vị. Với overlap, chọn chunk bao phủ có điểm bắt đầu nhỏ nhất. Mẫu thiên về chương Classes; phải ghi hạn chế này. Coherence và grounding dùng thang 0–2 theo GUIDE, không lấy Hit@3 thay nhãn đánh giá định tính.
+Hit requires matching source/page and sufficient gold evidence inside one chunk. Grounding is a separate qualitative judgement of the full top-3; Hit@3 is not an LLM-answer accuracy score. Annotation assistance and subsequent student review status are recorded in results/review_labels.json.
 
-Chạy `python -m starter.src.run validate` từ root để xác minh nguồn, hash, evidence và split mà không cần database. Không sửa corpus/config/benchmark giữa các chiến lược.
+Run `python -m starter.src.run validate` from the repository root to verify the PDF hash, extracted pages, metadata and evidence. The prior Python Tutorial corpus/annotations are available only in earlier Git history; none are reused as PDF results.

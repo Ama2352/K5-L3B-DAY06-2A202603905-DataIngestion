@@ -1,350 +1,410 @@
 {
-  "counting_rule": "HTML has no physical pages. Split each chapter in order at paragraph boundaries after 3500 normalized characters; merge a final tail shorter than 1500. No duplication. Page means 1-based unit within chapter.",
-  "normalization": "NFC, prose whitespace normalization; code indentation preserved. Main-body headings, paragraphs and code only. Navigation excluded.",
+  "source_format": "pdf",
+  "counting_rule": "Count physical PDF pages 4-40 inclusive: 37 pages of Setup and Experiments, including meaningful tables/figure captions. No duplicated, cover/contents/blank/reference-only pages. page is the original PDF page number.",
+  "normalization": "pypdf layout extraction; NFC; expand typographic ligatures; remove running headers/page numerals; join wrapped lines; keep blank/indented paragraphs. Line-end hyphens retained when joining; tables/equations are text approximations. No OCR or invented text.",
+  "filter_rule": "section is an array of real main-section titles. Page 10 belongs to both Setup and Experiments; filter uses array membership.",
   "sources": [
     {
-      "source_id": "controlflow",
-      "title": "4. More Control Flow Tools",
-      "source_path_or_url": "https://docs.python.org/3.13/tutorial/controlflow.html",
-      "snapshot_path": "data/raw/controlflow.html",
-      "snapshot_sha256": "b985d14cc9c7b109996d54c17e32b3f214c5e4cd0e9020de060f12ed0413bd49",
-      "normalized_sha256": "d1ead9c2eaeb26df86000ef236e7c7ea48e2e94cb34f1e40f7321e3c895dd7d3",
-      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
-      "license_url": "https://docs.python.org/3.13/license.html",
-      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
-      "physical_pages": null,
-      "content_units": 10,
+      "source_id": "t5_jmlr_2020",
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+      "authors": "Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, Peter J. Liu",
+      "source_path_or_url": "https://www.jmlr.org/papers/volume21/20-074/20-074.pdf",
+      "publication_url": "https://www.jmlr.org/papers/v21/20-074.html",
+      "snapshot_path": "data/raw/t5_jmlr_2020.pdf",
+      "snapshot_sha256": "66cf9f77e46691853703eb6982dea337a53361d509fb99be719b5410c5467e41",
+      "normalized_sha256": "3514d349a2f6a1ebe1fc9febc8b88cb31c29b0208af1d607135c4049a8c030a8",
+      "license_or_permission": "CC BY 4.0; notice printed on PDF page 1",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "accessed_at": "2026-11-14T05:19:51.838423+00:00",
+      "version": "JMLR 21(140):1-67, 2020",
+      "physical_pages": 67,
+      "selected_pages": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "content_units": 37,
+      "excluded_pages": [
+        {
+          "pages": [
+            1,
+            2,
+            3
+          ],
+          "reason": "Outside the selected Setup/Experiments scope."
+        },
+        {
+          "pages": [
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67
+          ],
+          "reason": "Outside selected scope; includes Reflection, appendices, references (references start at page 58)."
+        }
+      ],
+      "section_provenance": {
+        "2. Setup": "Heading page 4, continues through first part of page 10.",
+        "3. Experiments": "Heading page 10, continues through selected page 40."
+      },
       "units": [
         {
-          "page": 1,
-          "characters": 3791,
-          "start": 0,
-          "end": 3791
-        },
-        {
-          "page": 2,
-          "characters": 3750,
-          "start": 3791,
-          "end": 7541
-        },
-        {
-          "page": 3,
-          "characters": 3519,
-          "start": 7541,
-          "end": 11060
-        },
-        {
           "page": 4,
-          "characters": 4109,
-          "start": 11060,
-          "end": 15169
+          "characters": 3429,
+          "section": [
+            "2. Setup"
+          ],
+          "text_sha256": "20068cd4eaef2109d755aaa4573819096e1979c6d3d18161a44009c9c3a50b2a"
         },
         {
           "page": 5,
-          "characters": 3538,
-          "start": 15169,
-          "end": 18707
+          "characters": 3605,
+          "section": [
+            "2. Setup"
+          ],
+          "text_sha256": "eacc6ea70c0f098f9c93b05d19df706317758f65ee065a4142b20bb21141285e"
         },
         {
           "page": 6,
-          "characters": 3752,
-          "start": 18707,
-          "end": 22459
+          "characters": 3135,
+          "section": [
+            "2. Setup"
+          ],
+          "text_sha256": "9f977572fcc8d69017d01cbb518a633374b7153fb29ee4acc9b918e19ae92c93"
         },
         {
           "page": 7,
-          "characters": 3598,
-          "start": 22459,
-          "end": 26057
+          "characters": 2794,
+          "section": [
+            "2. Setup"
+          ],
+          "text_sha256": "52ea0063218c7ed591b4385cfa6dea6d4c4f12fbb71219420331f3e57ee73005"
         },
         {
           "page": 8,
-          "characters": 3757,
-          "start": 26057,
-          "end": 29814
+          "characters": 3610,
+          "section": [
+            "2. Setup"
+          ],
+          "text_sha256": "94ae9435d516ba261d64fd4249d366954f426d64c9bc1e2d9dd8fb3d896ea326"
         },
         {
           "page": 9,
-          "characters": 3612,
-          "start": 29814,
-          "end": 33426
+          "characters": 3828,
+          "section": [
+            "2. Setup"
+          ],
+          "text_sha256": "dd05fb9e3857529f7ec18d7d4e6e3a6f983c1ef8c7fa0f1bab31aeffc0ac812d"
         },
         {
           "page": 10,
-          "characters": 2427,
-          "start": 33426,
-          "end": 35853
-        }
-      ]
-    },
-    {
-      "source_id": "datastructures",
-      "title": "5. Data Structures",
-      "source_path_or_url": "https://docs.python.org/3.13/tutorial/datastructures.html",
-      "snapshot_path": "data/raw/datastructures.html",
-      "snapshot_sha256": "14cbb79ca8991c75ff9a17db2057640e528bb43b00925e58dd57de2cde746e5b",
-      "normalized_sha256": "2cf44e65e7e7634808193dc1fceb99010293893a03c6c6d965581d57774fee22",
-      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
-      "license_url": "https://docs.python.org/3.13/license.html",
-      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
-      "physical_pages": null,
-      "content_units": 6,
-      "units": [
-        {
-          "page": 1,
-          "characters": 3773,
-          "start": 0,
-          "end": 3773
+          "characters": 3330,
+          "section": [
+            "2. Setup",
+            "3. Experiments"
+          ],
+          "text_sha256": "33a27c4267dee89e47d83f369dfa2b852abc95b05f5da9ce18a4d010a7359023"
         },
         {
-          "page": 2,
-          "characters": 3510,
-          "start": 3773,
-          "end": 7283
+          "page": 11,
+          "characters": 3172,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "be8cb7c90f436ad773ebbbb44e69aa18cb0c825af8c20aa1b81d26b994d5236a"
         },
         {
-          "page": 3,
-          "characters": 3863,
-          "start": 7283,
-          "end": 11146
+          "page": 12,
+          "characters": 3412,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "e8ca25b1691f40fecfaa3245499ed6cec9165fa9f3579c9bb800d87430ae27f4"
         },
         {
-          "page": 4,
-          "characters": 3798,
-          "start": 11146,
-          "end": 14944
+          "page": 13,
+          "characters": 2788,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "ee5fbd96011f530c2dd21478bcb742fa7d403df830d70df1d7af2f984cab871c"
         },
         {
-          "page": 5,
-          "characters": 3551,
-          "start": 14944,
-          "end": 18495
+          "page": 14,
+          "characters": 3324,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "ca5fdc8c1a5c71e3dd0bf8201fb29aebc6ae3456d24c579f2f83690255dbdafc"
         },
         {
-          "page": 6,
-          "characters": 4008,
-          "start": 18495,
-          "end": 22503
-        }
-      ]
-    },
-    {
-      "source_id": "modules",
-      "title": "6. Modules",
-      "source_path_or_url": "https://docs.python.org/3.13/tutorial/modules.html",
-      "snapshot_path": "data/raw/modules.html",
-      "snapshot_sha256": "e331102d5eba9f1135e82bbec33defbceb638fe3b6d190694ba93b008e597bdc",
-      "normalized_sha256": "a99b16113824feaff3779855e7121a5e985644c65e754835fde3dd8b552d8089",
-      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
-      "license_url": "https://docs.python.org/3.13/license.html",
-      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
-      "physical_pages": null,
-      "content_units": 6,
-      "units": [
-        {
-          "page": 1,
-          "characters": 3504,
-          "start": 0,
-          "end": 3504
+          "page": 15,
+          "characters": 2270,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "89066ad6c2b64d462e872d931458fd0747e9c5f89beefd08e287c2c91037b76e"
         },
         {
-          "page": 2,
-          "characters": 3786,
-          "start": 3504,
-          "end": 7290
+          "page": 16,
+          "characters": 2360,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "0e2c8039bc76e98b9b6d1fcedce5e23aaf0d7e0e4d4693d011587f89b80927f1"
         },
         {
-          "page": 3,
-          "characters": 5055,
-          "start": 7290,
-          "end": 12345
+          "page": 17,
+          "characters": 3860,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "1600327e1a753d1b422c04ca09070d14035fd1e035095e19f409a51cf887da59"
         },
         {
-          "page": 4,
-          "characters": 3643,
-          "start": 12345,
-          "end": 15988
+          "page": 18,
+          "characters": 3721,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "5ab1ce0cec448404bc01a88637f25c1bf5f4998fa72e32797d1ee32d5dd55973"
         },
         {
-          "page": 5,
-          "characters": 3762,
-          "start": 15988,
-          "end": 19750
+          "page": 19,
+          "characters": 3007,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "be3c280389ce5c094e1e7cab51d990bfcd8bafbddcef3ca4abd7a3415d2c4c8b"
         },
         {
-          "page": 6,
+          "page": 20,
+          "characters": 3095,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "38a5ad03578522b9c88f11471e9026b86d0ba580a123403a398184cab5cfc87c"
+        },
+        {
+          "page": 21,
           "characters": 3198,
-          "start": 19750,
-          "end": 22948
-        }
-      ]
-    },
-    {
-      "source_id": "inputoutput",
-      "title": "7. Input and Output",
-      "source_path_or_url": "https://docs.python.org/3.13/tutorial/inputoutput.html",
-      "snapshot_path": "data/raw/inputoutput.html",
-      "snapshot_sha256": "be403cb24a4d23ddcde2f29ac20df4743e8216ac69d1244382c58dc2ae2a44f4",
-      "normalized_sha256": "b0fd907c0a6fd168ac1c518e2fda54fd49fa0072270689104b1ecdd4f8dbe526",
-      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
-      "license_url": "https://docs.python.org/3.13/license.html",
-      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
-      "physical_pages": null,
-      "content_units": 5,
-      "units": [
-        {
-          "page": 1,
-          "characters": 3610,
-          "start": 0,
-          "end": 3610
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "5dffa25665339b761d985345085ac1a9d6157e368651630e2a5a28a7bbc2330e"
         },
         {
-          "page": 2,
-          "characters": 3564,
-          "start": 3610,
-          "end": 7174
+          "page": 22,
+          "characters": 3308,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "82063244cf8046549f5d474629ef59aa0283bc882aac03e2f9229cce29cbcfa0"
         },
         {
-          "page": 3,
-          "characters": 3892,
-          "start": 7174,
-          "end": 11066
+          "page": 23,
+          "characters": 3002,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "61b63ccadfd8cea6071b051ed06127e70c1ca1dc74c8f6b315479723cceeae92"
         },
         {
-          "page": 4,
-          "characters": 3503,
-          "start": 11066,
-          "end": 14569
+          "page": 24,
+          "characters": 1991,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "06a1085d12f64b255cb1478e04d48eb54e33625018d7b61b763b8e5336a029b6"
         },
         {
-          "page": 5,
-          "characters": 3865,
-          "start": 14569,
-          "end": 18434
-        }
-      ]
-    },
-    {
-      "source_id": "errors",
-      "title": "8. Errors and Exceptions",
-      "source_path_or_url": "https://docs.python.org/3.13/tutorial/errors.html",
-      "snapshot_path": "data/raw/errors.html",
-      "snapshot_sha256": "979a709f665207b9bfaddd3dd8ea2ff9632afa4f3a7986198730cac14e662683",
-      "normalized_sha256": "f49e286986426da50a3be66db0e8711e4b8e769ce2e7af0b73727f9a73ec9065",
-      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
-      "license_url": "https://docs.python.org/3.13/license.html",
-      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
-      "physical_pages": null,
-      "content_units": 6,
-      "units": [
-        {
-          "page": 1,
-          "characters": 3576,
-          "start": 0,
-          "end": 3576
+          "page": 25,
+          "characters": 3284,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "2c1b0e0a988c0ab441c74356abd99ef252bf8f7c861b0950b208b4f97ae11127"
         },
         {
-          "page": 2,
-          "characters": 3773,
-          "start": 3576,
-          "end": 7349
+          "page": 26,
+          "characters": 2842,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "59bcf9bb75d443394ebf0c96d43282943ca062833ce2947802bf749970208cbb"
         },
         {
-          "page": 3,
-          "characters": 3510,
-          "start": 7349,
-          "end": 10859
+          "page": 27,
+          "characters": 3568,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "44e10ba774df41c246b57fa78ccd61337d719ce537e7f47cbfed9b648fe7cf86"
         },
         {
-          "page": 4,
-          "characters": 3609,
-          "start": 10859,
-          "end": 14468
+          "page": 28,
+          "characters": 2900,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "cf65734dcae38bca390d8c7ff7989bd41277110e8c65bbc8a50c01bc0c9c5d6d"
         },
         {
-          "page": 5,
-          "characters": 4169,
-          "start": 14468,
-          "end": 18637
+          "page": 29,
+          "characters": 2538,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "8af37db49dfbb959ab90d45a98d7fc5d63762bb92bdb12114ddc49ca29e2fd25"
         },
         {
-          "page": 6,
-          "characters": 2973,
-          "start": 18637,
-          "end": 21610
-        }
-      ]
-    },
-    {
-      "source_id": "classes",
-      "title": "9. Classes",
-      "source_path_or_url": "https://docs.python.org/3.13/tutorial/classes.html",
-      "snapshot_path": "data/raw/classes.html",
-      "snapshot_sha256": "6adb5bbe14eb9e8ed843d0ba03a33dd392d8ff8e8a70c5e1673dc97497cb2311",
-      "normalized_sha256": "7cd4bd64376fbd6efbead09478071df4c36293f52877fa05efddbcb61085e083",
-      "license_or_permission": "PSF License Version 2; code examples also 0BSD",
-      "license_url": "https://docs.python.org/3.13/license.html",
-      "accessed_at": "2026-11-13T16:43:40.598188+00:00",
-      "physical_pages": null,
-      "content_units": 9,
-      "units": [
-        {
-          "page": 1,
-          "characters": 4063,
-          "start": 0,
-          "end": 4063
+          "page": 30,
+          "characters": 3267,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "ac78173cf35b28a20b2b55f6481fe048f57943104f8dec39eaf3275b4c8ea87d"
         },
         {
-          "page": 2,
-          "characters": 3749,
-          "start": 4063,
-          "end": 7812
+          "page": 31,
+          "characters": 3532,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "a5f8761deb4f0c620dfefc55af9a8b0c0bba650fb69203a6812e480de4e00ead"
         },
         {
-          "page": 3,
-          "characters": 3552,
-          "start": 7812,
-          "end": 11364
+          "page": 32,
+          "characters": 3343,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "504d717b05e712cdb2776474eda1d5c8906d8546231294788431c9eab61f8199"
         },
         {
-          "page": 4,
-          "characters": 3792,
-          "start": 11364,
-          "end": 15156
+          "page": 33,
+          "characters": 3540,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "4de121c64bebfaaa269d76860aa74aa4b9a082d4a5016768ee57dd141c215b65"
         },
         {
-          "page": 5,
-          "characters": 3567,
-          "start": 15156,
-          "end": 18723
+          "page": 34,
+          "characters": 3638,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "edc2339d447ac3ca2cc2e950998dd169e6752361ffe945ceee60372958f65150"
         },
         {
-          "page": 6,
-          "characters": 3707,
-          "start": 18723,
-          "end": 22430
+          "page": 35,
+          "characters": 3056,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "3b87a4765dc4f23b2fae42cc51102274761057f432e4ee044cbd4d7961af748f"
         },
         {
-          "page": 7,
-          "characters": 3792,
-          "start": 22430,
-          "end": 26222
+          "page": 36,
+          "characters": 3208,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "d00d66e65f0639d7b6a52059e70458d10b79f553fa0869748642e6f7ddd35371"
         },
         {
-          "page": 8,
-          "characters": 3961,
-          "start": 26222,
-          "end": 30183
+          "page": 37,
+          "characters": 3440,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "1564f7013a1e8a2d4bae61b87758e614294b69f0c67f96b8ce70662dd342a874"
         },
         {
-          "page": 9,
-          "characters": 3541,
-          "start": 30183,
-          "end": 33724
+          "page": 38,
+          "characters": 3551,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "9cfa04d1579a0cee6cc5e27327261eac00c6fb2703e3c4de39295a5251db4c50"
+        },
+        {
+          "page": 39,
+          "characters": 2487,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "e87fdfd7dfefbb54857d0f66333ce05e85d6cd7d8702aa91b505aa019a64d2c4"
+        },
+        {
+          "page": 40,
+          "characters": 3804,
+          "section": [
+            "3. Experiments"
+          ],
+          "text_sha256": "eba89fca3947be69b66d35ef5ec5a8b086be70974cdc0f062d9402639929cca2"
         }
       ]
     }
   ],
-  "total_content_units": 42,
-  "total_characters": 155072
+  "total_content_units": 37,
+  "total_characters": 118237
 }

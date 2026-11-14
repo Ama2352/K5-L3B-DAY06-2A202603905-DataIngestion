@@ -1,109 +1,102 @@
-# Báo cáo cá nhân — Day 06: Data Ingestion
+# Báo cáo cá nhân — Day 06: corpus PDF T5
 
 - Họ tên: **Hồ Nguyễn Minh Sang**.
 - MSSV: **2A202603905**; lớp: **L3B**.
-- Chủ đề: truy xuất kiến thức Python từ Python 3.13 Tutorial.
-- Công cụ hỗ trợ: Codex hỗ trợ viết code, soạn benchmark, chạy thí nghiệm, đọc nguồn, review và dự thảo báo cáo. Nhãn định tính ban đầu do AI hỗ trợ chấm; học viên đã xác nhận xem xét audit trong phiên làm việc ngày 14/11/2026, không yêu cầu sửa nhãn. Đây không phải chấm mù độc lập.
+- Chủ đề: truy xuất bằng chứng về dữ liệu, kiến trúc và thực nghiệm transfer learning cho NLP từ paper T5.
+- Công cụ: Codex hỗ trợ triển khai, soạn câu hỏi, kiểm chứng nguồn, chạy thí nghiệm và đọc/chấm audit. Nhãn PDF có AI hỗ trợ và lý do; không giả định xác nhận audit HTML trước đây áp dụng cho corpus mới.
 
 ## 1. Dữ liệu và pipeline
 
-Corpus gồm sáu chương `controlflow`, `datastructures`, `modules`, `inputoutput`, `errors`, `classes` của Python 3.13 Tutorial. Snapshot HTML gốc và trang giấy phép nằm trong `data/raw/`. Tài liệu dùng PSF License Version 2; ví dụ code còn có lựa chọn 0BSD. Giấy phép, ghi công, thay đổi và cách tái tạo được lưu trong `data/ATTRIBUTION.md`, `data/LICENSE_PYTHON.txt`, `data/manifest.json`.
+Nguồn duy nhất: Colin Raffel và cộng sự (2020), **Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer**, JMLR 21(140):1–67. Nguồn chính thức: https://www.jmlr.org/papers/v21/20-074.html. Snapshot `data/raw/t5_jmlr_2020.pdf` giữ nguyên PDF gốc; trang 1 ghi **CC BY 4.0**, cho phép chia sẻ/chuyển đổi khi ghi công, dẫn giấy phép và nêu thay đổi. Ghi công đủ tác giả, URL và cách xử lý ở `data/ATTRIBUTION.md`; quyền được kiểm tra cho chính bản JMLR này.
 
-HTML không có phân trang vật lý. Mỗi chương được trích phần nội dung chính, chuẩn hóa Unicode NFC và khoảng trắng văn xuôi, giữ thụt lề của code; sau đó chia tuần tự tại ranh giới đoạn sau mốc 3.500 ký tự, gộp phần cuối nếu ngắn hơn 1.500. Kết quả **42 đơn vị nguồn hợp lệ**, tổng **155.072 ký tự**, mỗi đơn vị ≥1.500 ký tự. `page` là ID đơn vị trong chương, không phải số trang PDF. Manifest ghi start/end, số ký tự, URL, thời điểm tải, SHA-256 HTML và nội dung chuẩn hóa. Không nhân bản để đạt số lượng.
+Chọn **trang vật lý 4–40, tổng 37 trang**, thuộc Setup/Experiments. Có nội dung hữu ích trên từng trang, gồm văn bản, bảng/hình và chú thích liên quan; không đếm bìa/mục lục/trang trắng/trang chỉ có tham khảo. Trang 1–3 và 41–67 ngoài phạm vi được liệt kê trong manifest; tham khảo bắt đầu ở trang 58. `page` là số trang thật, không đổi thành đơn vị HTML hay chia nhỏ để tăng số trang.
 
-Pipeline: đọc snapshot → chuẩn hóa/đơn vị nguồn → chunk → embedding local → PostgreSQL/pgvector → truy xuất top-3 → chấm evidence → xuất trace và mẫu audit. Hàm đọc PDF cũng được hiện thực để hỗ trợ corpus khác, nhưng lần chạy này dùng HTML, không dùng OCR. Các lỗi PDF/rỗng được ghi qua logging; corpus hiện tại không có đơn vị rỗng hợp lệ bị bỏ qua âm thầm.
+Pypdf trích layout một cột; chuẩn hóa Unicode NFC, mở rộng ligature, bỏ running header/số trang, nối dòng văn xuôi, giữ đoạn và bullet. Không OCR hoặc tự sinh nội dung. Kết quả **118.237 ký tự**, các trang có từ **1.991 đến 3.860 ký tự**. Manifest ghi hash PDF, hash text từng trang, phiên bản, ngày tải, trang chọn/loại và provenance của section. Khi validate, pipeline tái trích xuất PDF và so khớp text/metadata, không chỉ tin file JSON.
 
-Một lỗi chuẩn hóa làm mất thụt lề code đã được phát hiện và sửa **trước khi chạy retrieval**; đã thêm regression test và tái tạo corpus/gold trước khi chốt thí nghiệm. Docker ban đầu lỗi route tới VM; khởi động lại Docker Desktop giúp database hoạt động. Log lỗi kết nối thật được khôi phục nguyên bản từ lịch sử Git trong `results/errors.json`. Pipeline không fallback sang vector giả hay tính similarity thuần Python.
+Giới hạn trích xuất: bảng/công thức được chuyển thành văn bản gần đúng; số mũ có thể mất định dạng, một số từ bị dính do kerning, line-end hyphen được giữ. Benchmark ưu tiên bằng chứng văn xuôi; PDF là bản chuẩn để đối chiếu. Không có trang scan/rỗng bị âm thầm bỏ qua; lỗi đọc trang gây dừng rõ ràng. `results/errors.json` là log lỗi kết nối setup thật từ lịch sử backend trước khi chuyển PDF; lần PDF này không gặp lỗi trích xuất.
 
-### Model và database
+Pipeline: PDF → trang chuẩn hóa → chunk A/B/C → embedding local → PostgreSQL/pgvector → top-3 → evidence metrics → audit và báo cáo. T5 là tài liệu nguồn, **không phải model embedding đang dùng**.
 
-- Python **3.13.5**, FastEmbed **0.8.0**, ONNX Runtime **1.27.0**, psycopg **3.3.9**.
-- Model **BAAI/bge-small-en-v1.5**, **384 chiều**, chạy CPU local, 4 threads; bản ONNX quantized do FastEmbed phân phối từ `qdrant/bge-small-en-v1.5-onnx-q`, revision `aa8f8b060edb00e03bfdd08813a2949946c8ba55`.
-- Query thêm prefix `Represent this sentence for searching relevant passages: `; document không thêm prefix. Giữ nguyên giữa A/B/C. Model/tokenizer có hash trong `results/environment.json`.
-- PostgreSQL **16.16**, pgvector **0.8.7**, image `pgvector/pgvector:0.8.7-pg16`; table `lab6_chunks`, phân biệt bằng `strategy`.
-- Cosine distance `<=>`, tìm kiếm **exact**; không có approximate vector index. Metadata JSONB có GIN index.
-- Lưu bền vững bằng volume Docker `day6_student_starter_pg_data`, cổng `127.0.0.1:55433`.
-- **Chi phí API: 0 USD**; không dùng Groq/API. Không quy đổi điện và khấu hao máy thành chi phí. Lần đầu cần tải model khoảng 67 MB; cache không đưa vào repo.
+### Model, backend và metadata
 
-Lệnh setup/run đầy đủ nằm trong RUNNING.md. Từ root: `.venv/Scripts/python.exe -m starter.src.run validate`, sau đó `... -m starter.src.run experiment`. Từ `starter/` có thể chạy `../.venv/Scripts/python.exe -m src.run`.
+- Embedding: **BAAI/bge-small-en-v1.5**, 384 chiều, FastEmbed/ONNX CPU local, 4 threads; query có prefix `Represent this sentence for searching relevant passages: `, document không prefix. Model quantized và tokenizer được hash trong `results/environment.json`.
+- Store: PostgreSQL **16.16**, pgvector **0.8.7**, table `lab6_chunks`, volume Docker `day6_student_starter_pg_data`; cosine distance `<=>`, **exact search**, không approximate index. Runtime/library versions trong environment và requirements lock.
+- Chi phí API **0 USD**, không gọi Groq/API; không quy đổi điện và phần cứng thành chi phí. Model cache/venv/.env không nộp.
+- Metadata: `document_id`, `source` (PDF URL), `page` (int vật lý), `start/end` (offset trong text trang), `section` (array string), `language=en`, `year=2020`, `version=JMLR 21(140), 2020`, `document_type=research_paper`, `page_kind=pdf`.
+- `section` lấy từ heading thật: Setup bắt đầu trang 4, Experiments bắt đầu trang 10. Trang 10 thuộc **cả hai**, không gán một nhãn giả. Filter input là một string được chuyển thành array containment trong JSONB; metadata đúng cho trang chuyển tiếp. Các trường hằng số như year/language giúp provenance nhưng không chứng minh lợi ích lọc trong corpus một tài liệu.
 
-### Metadata
+## 2. Cấu hình và benchmark
 
-Mỗi chunk có `document_id` (string), `source` (URL string), `page` (integer), `start/end` (integer, offset trong đơn vị), `unit_start/unit_end` (integer, offset trong chương), `chapter`, `language=en`, `version=3.13` (string). Các trường được lấy từ nguồn/ranh giới đã tính, không đoán ngày hiệu lực. `chapter` có sáu giá trị phân biệt và giúp giới hạn phạm vi theo chương được người dùng cung cấp. `language` và `version` hiện hằng số nên không đủ để chứng minh ích lợi lọc trên corpus này.
-
-## 2. Ba cấu hình và benchmark
-
-| Cấu hình | Chunk | Filter |
+| Cấu hình | Chunking | Filter |
 |---|---|---|
-| A | Cửa sổ 500 ký tự, overlap 50 | Không |
-| B | Gom theo đoạn, giới hạn 1.000 ký tự; đoạn quá dài vẫn phải cắt | Không |
-| C | Cùng chunk và vector của B | Lọc `chapter` khi câu hỏi có filter |
+| A | Fixed 500 ký tự, overlap 50 | Không |
+| B | Theo đoạn, tối đa 1.000 ký tự, không overlap; đoạn dài vẫn bị cắt | Không |
+| C | Cùng chunk/vector của B | `section` khi câu hỏi cung cấp phạm vi |
 
-Corpus/model/store/cosine/query/benchmark giống nhau. A–B so sánh cả chính sách chunking, bao gồm kích thước và overlap; không tách riêng ảnh hưởng của từng tham số. B–C chỉ đổi metadata filter. C tái dùng embedding của B để loại biến số và tiết kiệm tính toán; thời gian C không đại diện cho một lần ingest lạnh độc lập.
+Cùng corpus, model, metric, store, benchmark và query processing. A–B so sánh chính sách chunking, bao gồm size/overlap; không tách riêng từng tham số. B–C chỉ thay filter; C tái dùng vector B. Không fallback sang mock khi model/backend lỗi.
 
-Benchmark được soạn trước truy xuất: **20 câu tiếng Anh, 15 dev / 5 test**. Test: q04, q08, q12, q16, q20. Có 4 câu filter (q06, q11, q16, q20), gồm 2 test. Tên chương có ngay trong câu hỏi; filter là input trước truy xuất, không lấy gold source/answer để tạo filter. Evidence nguyên đoạn được đối chiếu với nguồn chuẩn hóa. Chia theo ID để phủ các chương nên vẫn có nguy cơ tương đồng chủ đề giữa dev và test.
+Benchmark mới gồm **20 câu tiếng Anh**, có câu trực tiếp, diễn đạt lại và điều kiện/ngoại lệ. Chốt **15 dev / 5 test** trước lần truy xuất PDF đầu tiên; test q04, q08, q12, q16, q20. Bốn câu filter: q06/q11 dev nêu Setup, q16/q20 test nêu Experiments. Filter lấy từ câu hỏi/ngữ cảnh trước truy xuất, không lấy đáp án hay gold page. Evidence được kiểm chứng nguyên văn trong text chuẩn hóa; vị trí quote trùng chính xác được tìm trước chạy để bổ sung alternative nếu có.
 
-Quy tắc chọn chốt trước: **dev Evidence Hit@3 → dev Hit@1 → ít chunk hơn → thứ tự tên cấu hình**. Lần chạy lại của học viên bắt đầu `2026-11-14T04:29:20Z`; `results/selection.json` ghi chọn **B** lúc `2026-11-14T04:30:50Z`, trước bước test, kết thúc `04:30:51Z`. B và C bằng điểm và số chunk nên B thắng tie-break theo tên. Không điều chỉnh cấu hình theo kết quả test; lần chạy lại dùng `--allow-rerun`, không coi bộ test đã xem là holdout độc lập mới.
+Thời điểm chốt và hash benchmark được ghi trong `artifacts/experiment_log.csv` trước chạy. Hash `questions.json` là `09317ff5009d1a9635d3d3c1dee52b2ee3a05cd5fbd2504d2355e858731adfac`. `frozen_inputs.json` ghi hash corpus/manifest/benchmark/config tại đầu chạy. Không sửa câu hỏi, gold hoặc cấu hình sau khi xem PDF test.
 
-**Hiệu chỉnh gold công khai:** sau lần chạy đầu, review phát hiện q12 có evidence hợp lệ khác ở `errors/5`. Đã thêm alternate và chấm lại **cùng trace**, giữ mọi query/hit/ranking/config. A test Hit@3 đổi 0/5 → 1/5; B/C và dev không đổi. Gold v1, trace/metrics gốc và hash trước/sau đều được giữ ở `benchmark/questions_v1.json`, `results/original_scoring/`, `results/scoring_amendment.json`. Kết quả hiệu chỉnh **không được coi là một holdout hoàn toàn chưa bị tác động**. Chi tiết: `benchmark/AMENDMENTS.md`.
+Quy tắc chọn: dev Evidence Hit@3 → dev Hit@1 → ít chunk hơn → tên cấu hình. Run bắt đầu **2026-11-14 05:28:34 UTC**, chọn **B lúc 05:29:33 UTC trước test**, kết thúc **05:29:34 UTC**. B/C hòa điểm và số chunk, B thắng tie-break theo tên. Không chọn lại theo test. Đây là corpus và câu hỏi mới; các thực nghiệm HTML cũ không được trộn vào số đo PDF và chỉ giữ trong lịch sử Git.
 
-## 3. Kết quả truy xuất và tài nguyên
+## 3. Kết quả và tài nguyên
 
-Hit tự động cần đúng nguồn/đơn vị và chứa đủ quote trong **một chunk**, chấp nhận alternate đã ghi. So khớp chuẩn hóa Unicode/khoảng trắng, không phân biệt hoa/thường. Không gộp evidence nhiều chunk để thay định nghĩa Hit@3 bắt buộc. Đây là proxy bảo thủ: mất vài ký tự đầu hoặc có bằng chứng tương đương chưa ghi có thể bị tính miss dù nội dung còn hữu ích; cần đọc cùng grounding.
+Hit tự động cần đúng nguồn/trang và chứa **đủ quote trong một chunk**, không chỉ đúng chủ đề hoặc cosine cao. So khớp bỏ khác biệt case/khoảng trắng/Unicode. Không cộng hai chunk để thay định nghĩa Hit@3 chính. Grounding xét cả top-3 riêng.
 
-| Strategy | Split | Hit@1 | Evidence Hit@3 | Chunk count | Ingest giây | API USD |
+| Cấu hình | Split | Hit@1 | Evidence Hit@3 | Chunk count | Ingest (s) | API USD |
 |---|---|---|---|---:|---:|---:|
-| A | dev | 7/15 (46,7%) | 9/15 (60,0%) | 359 | 40,46 | 0 |
-| A | test | 0/5 (0%) | 1/5 (20,0%) | 359 | — | 0 |
-| B | dev | 13/15 (86,7%) | 14/15 (93,3%) | 198 | 44,46 | 0 |
-| B | test | 5/5 (100%) | 5/5 (100%) | 198 | — | 0 |
-| C | dev | 13/15 (86,7%) | 14/15 (93,3%) | 198 | 0,29* | 0 |
-| C | test | 5/5 (100%) | 5/5 (100%) | 198 | — | 0 |
+| A | dev | 6/15 (40%) | 6/15 (40%) | 277 | 26,44 | 0 |
+| A | test | 2/5 (40%) | 2/5 (40%) | 277 | — | 0 |
+| B | dev | 11/15 (73,3%) | 12/15 (80%) | 160 | 28,58 | 0 |
+| B | test | 3/5 (60%) | 5/5 (100%) | 160 | — | 0 |
+| C | dev | 11/15 (73,3%) | 12/15 (80%) | 160 | 0,20* | 0 |
+| C | test | 3/5 (60%) | 5/5 (100%) | 160 | — | 0 |
 
-Ingest trong bảng lấy từ lần chạy lại ngày 14/11/2026, đo một lần cho mỗi cấu hình, không lặp lại theo split; `*` C tái sử dụng embedding B. Tổng ingest gồm chunk/token thống kê, embedding và lần ghi đầu, không gồm tải model/khởi tạo runtime, kiểm tra nạp lại hoặc thời gian xử lý sự cố Docker. Thời gian embedding A **39,77 s**, B **44,04 s**, C tái dùng; thời gian ghi đầu tương ứng **0,63 / 0,37 / 0,20 s**. B ít chunk hơn nhưng chunk dài hơn và lần đo CPU vẫn chậm hơn A; chưa đủ phép đo có kiểm soát để kết luận tốc độ tổng quát. Lần chạy lại giữ nguyên điểm, thứ hạng và nội dung hits so với kết quả đã hiệu chỉnh trước đó.
+`*` C dùng lại embedding B, không đại diện cho ingest lạnh độc lập. Ingest gồm chunk/token statistics, embedding và lần ghi đầu; không gồm tải/khởi tạo model, nạp lại để kiểm chứng hoặc sự cố setup. Embedding A **26,05 s**, B **28,36 s**; ghi đầu lần lượt **0,33 / 0,17 / 0,14 s**. B ít chunk hơn nhưng đoạn dài hơn và embedding CPU vẫn chậm hơn A trong lần đo này; một lần đo không cho phép suy rộng tốc độ.
 
-| Strategy | Độ dài ký tự min / median / max | Tổng ký tự chunk | Tổng token | Token max | Chunk >512 token | Số bản ghi trước/sau nạp lại |
+| Cấu hình | Ký tự min / median / max | Tổng ký tự chunk | Tổng token | Token max | Chunk >512 token | Bản ghi trước/sau nạp lại |
 |---|---|---:|---:|---:|---:|---|
-| A | 59 / 500 / 500 | 170.922 | 46.261 | 254 | 0 | 359 / 359 |
-| B | 44 / 839 / 1.000 | 154.772 | 41.343 | 483 | 0 | 198 / 198 |
-| C | 44 / 839 / 1.000 | 154.772 | 41.343 | 483 | 0 | 198 / 198 |
+| A | 58 / 500 / 500 | 130.237 | 31.601 | 264 | 0 | 277 / 277 |
+| B | 39 / 781,5 / 1.000 | 118.043 | 28.341 | 476 | 0 | 160 / 160 |
+| C | 39 / 781,5 / 1.000 | 118.043 | 28.341 | 476 | 0 | 160 / 160 |
 
-Overlap làm tổng ký tự A lớn hơn corpus; B/C bỏ một số dấu phân cách đoạn giữa chunk nên tổng ký tự hơi nhỏ hơn văn bản nguồn. Không mất nội dung vì truncation model trong lần chạy này. IDs dựa trên nội dung/vị trí; mỗi strategy được thay snapshot trong một transaction, xóa chunk cũ và ghi mới, có advisory lock. Kiểm thử database riêng xác minh thay đổi nguồn làm chunk cũ biến mất và dữ liệu còn đọc được qua client mới.
+Token được đo bằng tokenizer thật, không có chunk vượt giới hạn 512 token. Overlap làm A có thêm 12.000 ký tự; B/C bỏ 194 ký tự phân cách đoạn giữa chunk. Nạp lại giữ số bản ghi đúng; client mới đọc lại từ database thật. Mỗi strategy thay toàn bộ snapshot trong transaction có advisory lock; khi đổi tài liệu, chunk cũ bị xóa và ghi chunk mới với ID theo nội dung/vị trí. Nhờ đó corpus HTML không còn lẫn trong A/B/C của database. Không đổi vector store hoặc cosine giữa cấu hình.
 
-## 4. Coherence, metadata và grounding
+## 4. Audit: coherence, metadata, grounding
 
-Coherence dùng 10 vị trí nguồn chốt trước, offset giữa đơn vị, chọn chunk bao phủ có start nhỏ nhất. Mẫu là 9 đơn vị Classes và 1 Control Flow nên **thiên lệch về Classes**. Điểm 0 = không hiểu vì mất ý/chủ thể; 1 = hiểu một phần, thiếu ngữ cảnh; 2 = tự hiểu và giữ trọn ý.
+Mười vị trí coherence chốt trước: trang 4,8,12,16,20,24,28,32,36,40, offset giữa trang. Với nhiều chunk overlap bao phủ, chọn start nhỏ nhất. Đọc cùng vị trí cho A/B/C; mẫu trải đều phạm vi nhưng có thể rơi vào caption/công thức/bảng. Chấm 0 = không hiểu do mất ý/chủ thể; 1 = hiểu một phần/thiếu ngữ cảnh; 2 = tự hiểu, giữ trọn ý.
 
-Grounding đọc toàn bộ top-3 cho từng câu test: 0 = không evidence, 1 = thiếu điều kiện/ngữ cảnh cần thiết, 2 = đủ trả lời và truy nguồn. Đây là đánh giá evidence retrieval, không phải chất lượng câu trả lời do LLM sinh.
+Metadata được đọc trên **5 test × top-3 × 3 = 45 bản ghi**; đối chiếu PDF URL, trang, section thật và text span. Grounding đọc **5 test cho mỗi cấu hình**, cả top-3: 0 = không có bằng chứng yêu cầu; 1 = thiếu chi tiết/điều kiện cần thiết; 2 = đủ để trả lời và truy nguồn. Không đánh giá câu trả lời LLM.
 
-| Strategy | Coherence trung bình /2 (n=10) | Metadata đủ/đúng | Câu filter có top-3 tuân thủ | Grounding số câu 0 / 1 / 2 | Grounding trung bình /2 |
+| Cấu hình | Coherence /2 (10 mẫu) | Metadata đủ/đúng | Câu filter có top-3 tuân thủ | Grounding 0 / 1 / 2 | Grounding /2 (5 câu) |
 |---|---:|---|---|---|---:|
-| A | 0,8 | 15/15 | 2/2 | 0 / 1 / 4 | 1,8 |
-| B | 1,4 | 15/15 | 2/2 | 0 / 0 / 5 | 2,0 |
-| C | 1,4 | 15/15 | 2/2 | 0 / 0 / 5 | 2,0 |
+| A | 1,0 | 15/15 | 2/2 | 1 / 1 / 3 | 1,4 |
+| B | 1,5 | 15/15 | 2/2 | 0 / 0 / 5 | 2,0 |
+| C | 1,5 | 15/15 | 2/2 | 0 / 0 / 5 | 2,0 |
 
-**Phương pháp và người chấm:** Codex đọc các mẫu đã xuất, đối chiếu nguồn và gán nhãn có lý do; metadata còn có kiểm tra tự động text span/hash hỗ trợ. Học viên Hồ Nguyễn Minh Sang đã xác nhận trong hội thoại rằng đã xem xét audit, không yêu cầu sửa nhãn. `results/review_labels.json` giữ reviewer/phương pháp AI-assisted ban đầu và bổ sung `human_review_status=confirmed_by_student`, người xác nhận, căn cứ và thời điểm ghi nhận. Đây là xác nhận do học viên cung cấp, không phải một lượt chấm mù hay đo độ đồng thuận độc lập. Người hỗ trợ triển khai cũng hỗ trợ chấm nên vẫn có thiên lệch.
+Phương pháp/người chấm: Codex đọc các text/context hiển thị và ghi nhãn có lý do, metadata có thêm đối chiếu tự động nguồn/span. Nhãn **AI-assisted** và thiên lệch được công bố trong `review_labels.json`. B/C có cùng chunk mẫu và cùng test hits; kiểm chứng tính giống nhau trước khi áp dụng cùng nhận xét. Học viên đã xác nhận audit HTML trước đây, nhưng xác nhận đó **không được dùng cho PDF**; `human_review_status=pending` ở corpus mới. Không có blinded reviewer hoặc đo đồng thuận độc lập.
 
-Metadata được kiểm tra trên 5 test × top-3 mỗi cấu hình, tổng **45 bản ghi**. `source/page/start/end` giúp quay lại đoạn nguồn; `chapter` giới hạn phạm vi ở C. A/B không bật filter nhưng top-3 của hai câu filter test vẫn tự nhiên nằm trong đúng chương, vì vậy 2/2 **không chứng minh A/B có thực thi filter**, cũng không chứng minh C đã cải thiện relevance. Bộ test này chưa thể hiện lợi ích tăng điểm của filter; filter vẫn có ích để bảo đảm phạm vi khi được yêu cầu. Chương quá rộng chưa thay thế được metadata theo section hoặc nhóm người đọc.
+`source/page/start/end` giúp mở lại đoạn gốc, `section` bảo đảm phạm vi khi người dùng yêu cầu. Tuy nhiên cả B và C đã trả kết quả đúng scope ở các câu filter hiện tại, nên chưa thấy tăng Hit. A/B không thực thi filter dù top-3 hai câu filter test tình cờ đều thuộc Experiments; 2/2 không chứng minh A/B có cơ chế filter. Main section khá rộng, không xử lý nhầm lẫn giữa các ý trong cùng section.
 
-Nhãn và ngữ cảnh của 90 mẫu chấm: `results/review_labels.json`. Tổng hợp: `results/audit_summary.csv`; chạy lại bảng tổng hợp bằng `python -m starter.src.audit` sau khi cập nhật nhãn có chủ đích.
+## 5. Ví dụ lỗi, tác động và giới hạn
 
-## 5. Phân tích lỗi, đánh đổi và kết luận
+1. **A/q16, trang 29–30:** top-1 là bảng fine-tuning, top-3 mới có phần đầu mô tả adapter nhưng chưa tới câu nói layer normalization cũng được cập nhật. Hit@3=0, grounding=1. B/C giữ trọn đoạn trang 29 ở rank 2, đủ cả hai loại tham số; Hit@1=0 nhưng Hit@3=1.
+2. **A/q20, trang 40/37:** top-3 nói về baseline-1T, scale và giao thức test, không có lý do English-only/backtranslation; grounding=0. B/C có đúng đoạn trang 40 ở rank 2, grounding=2. Cosine gần chủ đề chưa bảo đảm đúng chi tiết.
+3. **A/q08, trang 12:** khoảng 5.000 bước và tiêu chí validation bị tách qua rank 1/rank 2. Hit@3 theo một-chunk là 0, nhưng đọc cả hai có đủ bằng chứng nên grounding=2. Không sửa gold để làm điểm đẹp hơn.
+4. **B/C/q11 dev:** filter đúng Setup nhưng kết quả ở trang 9/10, thiếu đoạn quy tắc output classification không thuộc label tại trang 8. Lọc main section không sửa được lỗi phân biệt chi tiết trong cùng phạm vi.
 
-1. **A, q08, `modules/2`:** đoạn giải thích script directory đứng trước standard library bị tách. Top-3 chỉ còn phần kết luận rằng module thư viện bị thay thế; thiếu lý do về thứ tự tìm kiếm. Hit@3 miss và grounding 1. B/C giữ nguyên đoạn, truy xuất top-1 đúng. Đây là lỗi thiếu ngữ cảnh thực sự.
-2. **B/C, q09 dev, `modules/1`:** câu hỏi hỏi module initialization chạy một lần khi import và khi chạy như script, nhưng top-3 nghiêng về `import *`, namespace và phần giới thiệu module. Cũng đúng chương nhưng thiếu đoạn chứa tần suất thực thi; Hit@3 miss. Filter theo chương không sửa được lỗi phân biệt ý trong cùng chương.
-3. **A, q04, `controlflow/6`:** top-1 mất chữ đầu của “Important”, nên không chứa nguyên quote đã ghi dù vẫn đủ nội dung về mutable default và ví dụ tích lũy. Hit@1/Hit@3 theo proxy vẫn miss, nhưng grounding 2. Điều này cho thấy không nên diễn giải Hit thấp thành toàn bộ truy xuất không hữu ích; checker nguyên đoạn và ranh giới chunk cùng ảnh hưởng số đo.
+Chọn **B** theo dev: tăng chất lượng evidence/coherence so với A, ít chunk hơn, nhưng thời gian embedding trong lần đo lớn hơn. C không tăng điểm so với B ở bộ câu hỏi này, chỉ bổ sung ràng buộc scope theo input người dùng. Không kết luận B là tốt nhất tổng quát từ 5 câu test.
 
-**Lựa chọn:** B theo quy tắc dev đã chốt. B/C đạt retrieval cao hơn A trên benchmark này và coherence cao hơn trong mẫu, song B tốn thời gian embedding CPU lớn hơn A ở lần đo. C không tăng điểm so với B trên bộ câu hỏi hiện tại; khi người dùng cung cấp phạm vi thì C vẫn cho cơ chế ràng buộc phạm vi rõ ràng. Chỉ kết luận trong corpus/model/bộ câu hỏi này, không tuyên bố chiến lược tốt nhất tổng quát.
+Giới hạn: một paper tiếng Anh, dev/test có chủ đề chung; 5 test quá nhỏ; bảng/công thức và kerning PDF không được phục dựng hoàn hảo; các đoạn >1.000 ký tự vẫn có thể bị cắt giữa ý. q08 chưa nêu rõ baseline trong câu hỏi trong khi phần T5 cuối dùng checkpoint 1.000 bước thay vì 5.000; giữ nguyên benchmark sau test, ghi rõ điểm mơ hồ, cần thiết kế câu rõ hơn trong tập mới sau này. Exact quote checker có thể tạo false negative, chưa liệt kê mọi evidence tương đương về nghĩa. Mẫu coherence có caption, đánh giá do cùng AI hỗ trợ triển khai nên có thiên lệch. Chỉ một lần đo tốc độ, C tái dùng vector và query embedding được cache giữa cấu hình; không so trực tiếp elapsed tổng với search-only latency.
 
-**Giới hạn:** 5 test quá nhỏ; corpus và câu hỏi tiếng Anh; dev/test trùng chủ đề; quote nguyên đoạn có thể tạo false negative do cắt ranh giới; chưa ghi được mọi evidence tương đương; q12 có hiệu chỉnh gold sau lần chạy; lần tái lập dùng test đã xem; nhãn AI-assisted đã được học viên xác nhận nhưng không chấm mù; mẫu coherence thiên lệch; bảng tốc độ lấy một lần chạy lại, không có thiết kế đo lặp cold/warm có kiểm soát, có tái sử dụng vector C và cache query giữa cấu hình. `elapsed_seconds` của query gồm embedding khi chưa có cache; chỉ `search_seconds` đo riêng truy xuất database, không so trực tiếp elapsed giữa A/B/C. Không có đánh giá câu trả lời sinh, OCR hay hybrid retrieval.
+Hướng cải thiện: chốt test mới rõ scope trước chạy, mở rộng nguồn/câu hỏi, chấm đối chiếu bởi người khác, chunk theo sentence/heading với ngân sách token, đo lặp cold/warm. Hybrid là mở rộng tùy chọn chưa làm; không bổ sung bằng cách chỉnh theo test hiện tại.
 
-Nếu mở rộng: chuẩn bị test mới độc lập và gold nhiều nguồn đã kiểm chứng trước chạy; chọn mẫu coherence phủ nhiều chương; chấm bằng hai người; thử chunk theo heading/sentence với ngân sách token được kiểm soát; đo lặp lại cold/warm; thử hybrid trên dev và giữ test mới cố định. Không triển khai các cải tiến này bằng cách chỉnh theo bộ test đã xem.
+## 6. Tái lập và nộp
 
-## 6. Tái lập và demo
+Lệnh setup/run trong `RUNNING.md`, code ở `starter/src/`. Từ root: `python -m starter.src.corpus`, `python -m starter.src.run validate`, rồi `python -m starter.src.run experiment`. Bản đã chạy cần sao lưu kết quả và dùng `--allow-rerun` khi muốn tái lập. Truy xuất C bằng `--section "2. Setup"` hoặc `--section "3. Experiments"`. Web demo tạm bỏ theo yêu cầu.
 
-Mã nguồn ở `starter/src/`; toàn bộ setup/run, kiểm thử và lệnh truy xuất thử ở RUNNING.md. Corpus đã có snapshot, manifest, giấy phép và benchmark. Trace đủ **45 dev + 15 test**, mỗi trace top-3; kết quả và nhãn đều lưu để kiểm tra. Chi tiết môi trường và hash nằm trong `results/environment.json`, `frozen_inputs.json`, `scoring_amendment.json`; cấu hình ở `artifacts/strategies.json`, nhật ký ở `artifacts/experiment_log.csv`.
+Minh chứng: manifest/PDF/attribution, benchmark/questions, strategies/experiment log, 45 dev + 15 test traces đủ top-3, metrics/ingest stats, environment/frozen inputs/selection, 90 nhãn và audit summary, log setup thật. Không giữ file snapshot chunk/review inputs trùng lặp hoặc kết quả HTML cũ trong working tree.
 
-Web demo chạy bằng `python -m starter.src.demo`, mở `http://127.0.0.1:8000`. Tab truy vấn hiển thị input embedding thật, vector mẫu, metadata filter và top-3 trực tiếp từ pgvector. Tab kết quả hiển thị metrics, trace/gold, thống kê ingest và audit từ file đã lưu. Web không gọi Groq, không sinh câu trả lời LLM, không ghi đè kết quả. Đây là phần trình bày bổ sung, không phải hybrid retrieval.
-
-Thông tin họ tên, MSSV, lớp và việc xem xét audit đã được học viên xác nhận. Link repo đã điền trong `STUDENT.md`; commit chốt là HEAD nhánh main tại thời điểm nộp. Việc push, kiểm tra quyền truy cập của người chấm và nộp link theo kênh lớp cần được thực hiện ở bước nộp bài. Không commit `.env`, model cache hay dữ liệu nhạy cảm.
+Thông tin học viên và link repo ở `STUDENT.md`; commit chốt là HEAD nhánh main tại thời điểm nộp. Cần phân biệt nhãn AI-assisted PDF mới với xác nhận audit cũ. Bước push, bảo đảm người chấm truy cập được và nộp link theo kênh lớp là thao tác nộp bên ngoài repo. Không commit secret, .env, venv hay model cache.

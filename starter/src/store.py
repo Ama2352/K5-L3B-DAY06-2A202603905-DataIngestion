@@ -6,7 +6,7 @@ from psycopg.types.json import Jsonb
 from .embeddings import validate_vectors
 from .models import Chunk
 
-FILTER_FIELDS = {'chapter', 'language', 'version'}
+FILTER_FIELDS = {'section', 'chapter', 'language', 'version', 'year'}
 
 class PgVectorStore:
     def __init__(self, database_url: str, dimensions: int) -> None:
@@ -57,11 +57,12 @@ class PgVectorStore:
         filters = filters or {}
         if set(filters) - FILTER_FIELDS or any(not isinstance(v, str) for v in filters.values()):
             raise ValueError('Unsupported metadata filter')
+        containment = {k: [v] if k == 'section' else v for k, v in filters.items()}
         vector = json.dumps(query_vector)
         with self._connect() as connection:
             rows = connection.execute("""SELECT chunk_id, text, metadata,
                 1 - (embedding <=> %s::vector) AS score
                 FROM lab6_chunks WHERE strategy = %s AND metadata @> %s
                 ORDER BY embedding <=> %s::vector, chunk_id LIMIT %s""",
-                (vector, strategy, Jsonb(filters), vector, top_k)).fetchall()
+                (vector, strategy, Jsonb(containment), vector, top_k)).fetchall()
         return [{'chunk_id': row[0], 'text': row[1], 'metadata': row[2], 'score': float(row[3])} for row in rows]

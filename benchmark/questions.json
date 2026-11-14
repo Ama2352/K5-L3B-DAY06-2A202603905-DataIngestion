@@ -2,257 +2,249 @@
   {
     "id": "q01",
     "split": "dev",
-    "question": "Which built-in function generates arithmetic progressions for looping over numbers?",
-    "expected_answer": "range() generates arithmetic progressions.",
-    "gold_source_id": "controlflow",
-    "gold_page": 1,
-    "evidence_quote": "If you do need to iterate over a sequence of numbers, the built-in function\nrange() comes in handy. It generates arithmetic progressions:",
+    "question": "What simplification does T5 apply to layer normalization?",
+    "expected_answer": "Activations are rescaled, with no additive bias.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 4,
+    "evidence_quote": "We use a simplified version of layer normalization where the activations are only rescaled and no additive bias is applied.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q02",
     "split": "dev",
-    "question": "Which enclosing loop does a break statement exit?",
-    "expected_answer": "The innermost enclosing for or while loop.",
-    "gold_source_id": "controlflow",
-    "gold_page": 2,
-    "evidence_quote": "The break statement breaks out of the innermost enclosing\nfor or while loop:",
+    "question": "How are relative position embeddings simplified in the T5 implementation?",
+    "expected_answer": "Each position embedding is a scalar added to the attention logit.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 5,
+    "evidence_quote": "We use a simplified form of position embeddings where each “embedding” is simply a scalar that is added to the corresponding logit used for computing the attention weights.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q03",
     "split": "dev",
-    "question": "What does continue do inside a Python loop?",
-    "expected_answer": "It continues with the next iteration.",
-    "gold_source_id": "controlflow",
-    "gold_page": 2,
-    "evidence_quote": "The continue statement continues with the next\niteration of the loop:",
+    "question": "What minimum sentence and word counts were required when cleaning Common Crawl for C4?",
+    "expected_answer": "Discard pages with fewer than five sentences; retain lines with at least three words.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 6,
+    "evidence_quote": "We discarded any page with fewer than 5 sentences and only retained lines that contained at least 3 words.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q04",
     "split": "test",
-    "question": "Why can a mutable default list accumulate values across function calls?",
-    "expected_answer": "Default values are evaluated only once, so calls can share the same mutable object.",
-    "gold_source_id": "controlflow",
+    "question": "How did the C4 cleaning pipeline handle warnings about enabling Javascript?",
+    "expected_answer": "It removed any line containing the word Javascript.",
+    "gold_source_id": "t5_jmlr_2020",
     "gold_page": 6,
-    "evidence_quote": "Important warning: The default value is evaluated only once. This makes a\ndifference when the default is a mutable object such as a list, dictionary, or\ninstances of most classes. For example, the following function accumulates the\narguments passed to it on subsequent calls:",
+    "evidence_quote": "Many of the scraped pages contained warnings stating that Javascript should be enabled so we removed any line with the word Javascript.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q05",
     "split": "dev",
-    "question": "How do tuples and lists differ in mutability and typical element usage?",
-    "expected_answer": "Tuples are immutable and usually heterogeneous; lists are mutable and usually homogeneous.",
-    "gold_source_id": "datastructures",
-    "gold_page": 3,
-    "evidence_quote": "Though tuples may seem similar to lists, they are often used in different\nsituations and for different purposes.\nTuples are immutable, and usually contain a heterogeneous sequence of\nelements that are accessed via unpacking (see later in this section) or indexing\n(or even by attribute in the case of namedtuples).\nLists are mutable, and their elements are usually homogeneous and are\naccessed by iterating over the list.",
+    "question": "Approximately how large is the cleaned English C4 corpus described in the paper?",
+    "expected_answer": "About 750 GB.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 7,
+    "evidence_quote": "This produces a collection of text that is not only orders of magnitude larger than most data sets used for pre-training (about 750 GB) but also comprises reasonably clean and natural English text.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q06",
     "split": "dev",
-    "question": "In the data structures chapter, what properties define a set and what are its basic uses?",
-    "expected_answer": "An unordered collection without duplicates, useful for membership tests and removing duplicates.",
-    "gold_source_id": "datastructures",
-    "gold_page": 4,
-    "evidence_quote": "Python also includes a data type for sets. A set is\nan unordered collection with no duplicate elements. Basic uses include\nmembership testing and eliminating duplicate entries. Set objects also\nsupport mathematical operations like union, intersection, difference, and\nsymmetric difference.",
+    "question": "Within the Setup section, how does the text-to-text model know which task to perform?",
+    "expected_answer": "A task-specific text prefix is added to the original input sequence.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 8,
+    "evidence_quote": "To specify which task the model should perform, we add a task-specific (text) prefix to the original input sequence before feeding it to the model.",
     "filter": {
-      "chapter": "datastructures"
+      "section": "2. Setup"
     },
-    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "filter_origin": "Main-section scope explicitly supplied in the question before retrieval.",
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q07",
     "split": "dev",
-    "question": "How does del differ from pop when removing list items?",
-    "expected_answer": "del removes items by index or slices without returning a value, whereas pop returns a value.",
-    "gold_source_id": "datastructures",
-    "gold_page": 3,
-    "evidence_quote": "There is a way to remove an item from a list given its index instead of its\nvalue: the del statement. This differs from the pop() method\nwhich returns a value. The del statement can also be used to remove\nslices from a list or clear the entire list (which we did earlier by assignment\nof an empty list to the slice). For example:",
+    "question": "How does T5 turn an STS-B similarity score such as 2.57 into a text target?",
+    "expected_answer": "Round to the nearest 0.2, so 2.57 becomes the string 2.6.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 9,
+    "evidence_quote": "We found that most of these scores were annotated in increments of 0.2, so we simply rounded any score to the nearest increment of 0.2 and converted the result to a literal string representation of the number (e.g. the floating-point value 2.57 would be mapped to the string “2.6”).",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q08",
     "split": "test",
-    "question": "Why can a script beside a standard-library module name shadow that library module?",
-    "expected_answer": "The script directory precedes the standard-library directory on sys.path.",
-    "gold_source_id": "modules",
-    "gold_page": 2,
-    "evidence_quote": "After initialization, Python programs can modify sys.path. The\ndirectory containing the script being run is placed at the beginning of the\nsearch path, ahead of the standard library path. This means that scripts in that\ndirectory will be loaded instead of modules of the same name in the library\ndirectory. This is an error unless the replacement is intended. See section\nStandard Modules for more information.",
+    "question": "How often are fine-tuning checkpoints saved, and which checkpoint is reported?",
+    "expected_answer": "Every 5,000 steps; report the checkpoint with highest validation performance.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 12,
+    "evidence_quote": "We save a checkpoint every 5,000 steps and report results on the model checkpoint corresponding to the highest validation performance.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q09",
     "split": "dev",
-    "question": "How often are module initialization statements executed by import, and what happens when run as a script?",
-    "expected_answer": "They run on the first import of that module name and also when the file runs as a script.",
-    "gold_source_id": "modules",
-    "gold_page": 1,
-    "evidence_quote": "A module can contain executable statements as well as function definitions.\nThese statements are intended to initialize the module. They are executed only\nthe first time the module name is encountered in an import statement. [1]\n(They are also run if the file is executed as a script.)",
+    "question": "Which optimizer and test-time decoding method does the baseline use?",
+    "expected_answer": "AdaFactor and greedy decoding.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 11,
+    "evidence_quote": "For optimization, we use AdaFactor (Shazeer and Stern, 2018). At test time, we use greedy decoding (i.e. choosing the highest-probability logit at every timestep).",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q10",
     "split": "dev",
-    "question": "Where does Python cache compiled modules and how are the cache files named?",
-    "expected_answer": "In __pycache__, using module.version.pyc so versions can coexist.",
-    "gold_source_id": "modules",
-    "gold_page": 3,
-    "evidence_quote": "To speed up loading modules, Python caches the compiled version of each module\nin the __pycache__ directory under the name module.version.pyc,\nwhere the version encodes the format of the compiled file; it generally contains\nthe Python version number. For example, in CPython release 3.3 the compiled\nversion of spam.py would be cached as __pycache__/spam.cpython-33.pyc. This\nnaming convention allows compiled modules from different releases and different\nversions of Python to coexist.",
+    "question": "What tokenizer and vocabulary size are used across the experiments?",
+    "expected_answer": "SentencePiece; 32,000 wordpieces.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 12,
+    "evidence_quote": "We use SentencePiece (Kudo and Richardson, 2018) to encode text as WordPiece tokens (Sennrich et al., 2015; Kudo, 2018). For all experiments, we use a vocabulary of 32,000 wordpieces.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q11",
     "split": "dev",
-    "question": "According to the modules chapter, what does dir() return for a module?",
-    "expected_answer": "A sorted list of strings naming what the module defines.",
-    "gold_source_id": "modules",
-    "gold_page": 3,
-    "evidence_quote": "The built-in function dir() is used to find out which names a module\ndefines. It returns a sorted list of strings:",
+    "question": "Within the Setup section, what happens if a classification output is not one of the allowed labels?",
+    "expected_answer": "It is always counted as wrong; the authors did not observe this in their trained models.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 8,
+    "evidence_quote": "Note that an issue arises if our model outputs text on a text classification task that does not correspond to any of the possible labels (for example if the model outputs “hamburger” when the only possible labels for a task were “entailment”, “neutral”, or “contradiction”). In this case, we always count the model’s output as wrong, though we never observed this behavior in any of our trained models.",
     "filter": {
-      "chapter": "modules"
+      "section": "2. Setup"
     },
-    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "filter_origin": "Main-section scope explicitly supplied in the question before retrieval.",
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q12",
     "split": "test",
-    "question": "Why use with when working with files if an exception may occur?",
-    "expected_answer": "The file is properly closed when the suite finishes, including when an exception is raised.",
-    "gold_source_id": "inputoutput",
-    "gold_page": 4,
-    "evidence_quote": "It is good practice to use the with keyword when dealing\nwith file objects. The advantage is that the file is properly closed\nafter its suite finishes, even if an exception is raised at some\npoint. Using with is also much shorter than writing\nequivalent try-finally blocks:",
+    "question": "Why is causal masking used when training the Transformer decoder?",
+    "expected_answer": "It blocks attention to future positions so the model cannot see future outputs during training.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 17,
+    "evidence_quote": "The self-attention operations in the Transformer’s decoder use a “causal” masking pattern. When producing the ith entry of the output sequence, causal masking prevents the model from attending to the jth entry of the input sequence for j >i. This is used during training so that the model can’t “see into the future” as it produces its output.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection.",
-    "alternative_gold": [
-      {
-        "gold_source_id": "errors",
-        "gold_page": 5,
-        "evidence_quote": "After the statement is executed, the file f is always closed, even if a\nproblem was encountered while processing the lines.",
-        "review_note": "The predefined clean-up section independently supports automatic file closure even if processing fails."
-      }
-    ]
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q13",
     "split": "dev",
-    "question": "How can readline distinguish end-of-file from an empty line?",
-    "expected_answer": "End-of-file is an empty string; a blank line contains a newline character.",
-    "gold_source_id": "inputoutput",
-    "gold_page": 4,
-    "evidence_quote": "f.readline() reads a single line from the file; a newline character (\\n)\nis left at the end of the string, and is only omitted on the last line of the\nfile if the file doesn’t end in a newline. This makes the return value\nunambiguous; if f.readline() returns an empty string, the end of the file\nhas been reached, while a blank line is represented by '\\n', a string\ncontaining only a single newline.",
+    "question": "What fraction of input tokens does the baseline denoising objective drop, and how are consecutive dropped spans represented?",
+    "expected_answer": "Drop 15% of tokens; replace each consecutive span with one sentinel token.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 13,
+    "evidence_quote": "we design an objective that randomly samples and then drops out 15% of tokens in the input sequence. All consecutive spans of dropped-out tokens are replaced by a single sentinel token.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q14",
     "split": "dev",
-    "question": "What do serializing and deserializing mean when using JSON with Python data?",
-    "expected_answer": "Serializing converts Python data to a string representation; deserializing reconstructs it.",
-    "gold_source_id": "inputoutput",
-    "gold_page": 5,
-    "evidence_quote": "Rather than having users constantly writing and debugging code to save\ncomplicated data types to files, Python allows you to use the popular data\ninterchange format called JSON (JavaScript Object Notation). The standard module called json can take Python\ndata hierarchies, and convert them to string representations; this process is\ncalled serializing. Reconstructing the data from the string representation\nis called deserializing. Between serializing and deserializing, the\nstring representing the object may have been stored in a file or data, or\nsent over a network connection to some distant machine.",
+    "question": "How did sharing encoder-decoder parameters compare with halving their numbers of layers?",
+    "expected_answer": "Sharing performed nearly as well, while halving the layers significantly hurt performance.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 19,
+    "evidence_quote": "Surprisingly, we found that sharing parameters across the encoder and decoder performed nearly as well. In contrast, halving the number of layers in the encoder and decoder stacks significantly hurt performance.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q15",
     "split": "dev",
-    "question": "Why put successful follow-up work in try/except/else rather than in the try block?",
-    "expected_answer": "To avoid catching exceptions from work outside the code intended to be protected.",
-    "gold_source_id": "errors",
-    "gold_page": 3,
-    "evidence_quote": "The use of the else clause is better than adding additional code to\nthe try clause because it avoids accidentally catching an exception\nthat wasn’t raised by the code being protected by the try …\nexcept statement.",
+    "question": "Which average corrupted span length slightly outperformed independent corruption on most non-translation benchmarks?",
+    "expected_answer": "An average span length of 3.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 24,
+    "evidence_quote": "We also find in particular that using an average span length of 3 slightly (but significantly) outperforms the i.i.d. objective on most non-translation benchmarks.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q16",
     "split": "test",
-    "question": "In the errors chapter, does finally run if the try statement produces no exception?",
-    "expected_answer": "Yes. It executes before try completes whether or not an exception occurred.",
-    "gold_source_id": "errors",
-    "gold_page": 4,
-    "evidence_quote": "If a finally clause is present, the finally\nclause will execute as the last task before the try\nstatement completes. The finally clause runs whether or\nnot the try statement produces an exception. The following\npoints discuss more complex cases when an exception occurs:",
+    "question": "Within the Experiments section, which parameters are updated when fine-tuning with adapter layers?",
+    "expected_answer": "Only adapter-layer and layer-normalization parameters.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 29,
+    "evidence_quote": "When fine-tuning, only the adapter layer and layer normalization parameters are updated.",
     "filter": {
-      "chapter": "errors"
+      "section": "3. Experiments"
     },
-    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "filter_origin": "Main-section scope explicitly supplied in the question before retrieval.",
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q17",
     "split": "dev",
-    "question": "How can multiple exception instances be raised together in Python?",
-    "expected_answer": "Wrap them in an ExceptionGroup, which is itself an exception.",
-    "gold_source_id": "errors",
-    "gold_page": 5,
-    "evidence_quote": "The builtin ExceptionGroup wraps a list of exception instances so\nthat they can be raised together. It is an exception itself, so it can be\ncaught like any other exception.",
+    "question": "Why do the authors suspect that shrinking the pre-training dataset can hurt downstream performance?",
+    "expected_answer": "The model may memorize the smaller pre-training dataset.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 28,
+    "evidence_quote": "As expected, performance degrades as the data set size shrinks. We suspect this may be due to the fact that the model begins to memorize the pre-training data set.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q18",
     "split": "dev",
-    "question": "How do instance variables differ from class variables?",
-    "expected_answer": "Instance variables hold data unique to an instance; class variables are shared by all instances.",
-    "gold_source_id": "classes",
-    "gold_page": 5,
-    "evidence_quote": "Generally speaking, instance variables are for data unique to each instance\nand class variables are for attributes and methods shared by all instances\nof the class:",
+    "question": "What explanations are offered for the poor performance of equal task mixing?",
+    "expected_answer": "Low-resource tasks may overfit, high-resource tasks may see too little data, or the model may see too little unlabeled data.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 32,
+    "evidence_quote": "The “equal” mixing strategy in particular results in dramatically degraded performance, which may be because the low-resource tasks have overfit, the high-resource tasks have not seen enough data, or the model has not seen enough unlabeled data to learn general-purpose language capabilities.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q19",
     "split": "dev",
-    "question": "When is __init__ invoked for a new class instance?",
-    "expected_answer": "Class instantiation automatically invokes it for the newly created instance.",
-    "gold_source_id": "classes",
-    "gold_page": 4,
-    "evidence_quote": "When a class defines an __init__() method, class instantiation\nautomatically invokes __init__() for the newly created class instance. So\nin this example, a new, initialized instance can be obtained by:",
+    "question": "How does the scaling experiment combine model outputs in an ensemble?",
+    "expected_answer": "Average logits before the output softmax to obtain an aggregate prediction.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 34,
+    "evidence_quote": "We average the logits across the ensemble before feeding them into the output softmax nonlinearity to obtain an aggregate prediction.",
     "filter": {},
     "filter_origin": "No filter.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   },
   {
     "id": "q20",
     "split": "test",
-    "question": "According to the classes chapter, does a single leading underscore enforce private access?",
-    "expected_answer": "No. It is a convention for non-public implementation details, not enforced private access.",
-    "gold_source_id": "classes",
-    "gold_page": 7,
-    "evidence_quote": "“Private” instance variables that cannot be accessed except from inside an\nobject don’t exist in Python. However, there is a convention that is followed\nby most Python code: a name prefixed with an underscore (e.g. _spam) should\nbe treated as a non-public part of the API (whether it is a function, a method\nor a data member). It should be considered an implementation detail and subject\nto change without notice.",
+    "question": "Within the Experiments section, what factors may explain why T5 did not reach state of the art on WMT translation?",
+    "expected_answer": "English-only unlabeled pre-training and the use of sophisticated backtranslation by competing systems.",
+    "gold_source_id": "t5_jmlr_2020",
+    "gold_page": 40,
+    "evidence_quote": "We did not achieve state-of-the-art performance on any of the WMT translation tasks. This may be in part due to our use of an English-only unlabeled data set. We also note that most of the best results on these tasks use backtranslation (Edunov et al., 2018; Lample and Conneau, 2019), which is a sophisticated data augmentation scheme.",
     "filter": {
-      "chapter": "classes"
+      "section": "3. Experiments"
     },
-    "filter_origin": "Chapter explicitly supplied in question before retrieval.",
-    "evidence_verified": "Exact paragraph from normalized source; AI-assisted authoring and source inspection."
+    "filter_origin": "Main-section scope explicitly supplied in the question before retrieval.",
+    "evidence_verified": "Exact normalized PDF text; AI-assisted source reading. Questions and split fixed before the first PDF retrieval run."
   }
 ]

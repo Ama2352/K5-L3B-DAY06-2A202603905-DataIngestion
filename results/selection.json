@@ -1,36 +1,36 @@
 {
-  "selected_at": "2026-11-14T04:30:50.732189+00:00",
+  "selected_at": "2026-11-14T05:29:33.612177+00:00",
   "selected_strategy": "B",
   "dev_metrics": [
     {
       "strategy": "A",
       "split": "dev",
       "n": 15,
-      "hit1_n": 7,
-      "hit3_n": 9,
-      "hit1": 0.4666666666666667,
-      "hit3": 0.6
+      "hit1_n": 6,
+      "hit3_n": 6,
+      "hit1": 0.4,
+      "hit3": 0.4
     },
     {
       "strategy": "B",
       "split": "dev",
       "n": 15,
-      "hit1_n": 13,
-      "hit3_n": 14,
-      "hit1": 0.8666666666666667,
-      "hit3": 0.9333333333333333
+      "hit1_n": 11,
+      "hit3_n": 12,
+      "hit1": 0.7333333333333333,
+      "hit3": 0.8
     },
     {
       "strategy": "C",
       "split": "dev",
       "n": 15,
-      "hit1_n": 13,
-      "hit3_n": 14,
-      "hit1": 0.8666666666666667,
-      "hit3": 0.9333333333333333
+      "hit1_n": 11,
+      "hit3_n": 12,
+      "hit1": 0.7333333333333333,
+      "hit3": 0.8
     }
   ],
   "rule": "Hit@3, then Hit@1, fewer chunks, strategy name",
   "test_evaluated": true,
-  "finished_at": "2026-11-14T04:30:51.296277+00:00"
+  "finished_at": "2026-11-14T05:29:34.218985+00:00"
 }

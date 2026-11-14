@@ -1,11 +1,10 @@
-# Python Tutorial corpus
+# Corpus attribution and permission
 
-Nguồn: Python Software Foundation và các tác giả đóng góp, Python 3.13 Tutorial.
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu (2020). *Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer*. JMLR 21(140):1-67.
 
-- Nguồn từng chương, thời điểm tải, hash và ranh giới đơn vị: `manifest.json`.
-- Bản HTML gốc: `raw/`; giấy phép gốc: `raw/license.html`.
-- Toàn văn nội dung trang giấy phép được lưu ở `LICENSE_PYTHON.txt`.
-- Tài liệu theo PSF License Version 2; ví dụ code còn có lựa chọn 0BSD. Xem https://docs.python.org/3.13/license.html.
-- Thay đổi để làm lab: trích phần nội dung chính, bỏ điều hướng, chuẩn hóa Unicode/khoảng trắng của văn xuôi, giữ thụt lề code và chia thành đơn vị nguồn tuần tự. Không tuyên bố đây là bản tài liệu Python đầy đủ.
+- Publication: https://www.jmlr.org/papers/v21/20-074.html
+- Original PDF: https://www.jmlr.org/papers/volume21/20-074/20-074.pdf
+- License: **Creative Commons Attribution 4.0 International (CC BY 4.0)**, explicitly printed at the bottom of PDF page 1: https://creativecommons.org/licenses/by/4.0/.
+- The license permits sharing and adaptation with attribution, a license link and indication of changes. No author endorsement is implied.
 
-HTML không có số trang vật lý: `page` là số thứ tự đơn vị nguồn trong từng chương, không phải số trang PDF. Mỗi đơn vị có ít nhất 1.500 ký tự; không nhân bản nội dung để tăng số lượng. `chapter` lấy trực tiếp từ chương nguồn, dùng để lọc; `version=3.13` là nhánh URL, không phải ngày hiệu lực.
+The PDF snapshot is unchanged. This lab extracts physical pages 4-40, normalizes Unicode and ligatures, removes running headers/page numbers, rejoins line wraps, groups paragraphs and creates retrieval chunks. These transformed texts, benchmark evidence quotes and traces retain source and physical page attribution. Tables/equations are extracted as text approximations; the PDF remains the reference. No OCR, API or synthetic source text is used. Manifest records acquisition time, SHA-256, chosen/excluded pages, character counts and verified section boundaries.

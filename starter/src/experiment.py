@@ -13,7 +13,7 @@ from .chunking import fixed_size, by_paragraph
 from .embeddings import DEFAULT_MODEL, QUERY_PREFIX, MyEmbedder
 from .evaluation import evaluate_query, summarize
 from .ingestion import load_pages
-from .validation import validate_benchmark
+from .validation import validate_benchmark, matches_filter
 
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / 'results'
@@ -40,17 +40,17 @@ def load_inputs():
     configs = json.loads((ROOT / 'artifacts/strategies.json').read_text(encoding='utf-8'))
     validation = validate_benchmark(pages, questions)
     manifest = json.loads((ROOT / 'data/manifest.json').read_text(encoding='utf-8'))
-    from .corpus import extract_html, source_units
+    from .corpus import extract_pdf
     for source in manifest['sources']:
         raw = (ROOT / source['snapshot_path']).read_bytes()
         if hashlib.sha256(raw).hexdigest() != source['snapshot_sha256']:
             raise ValueError('Source snapshot hash mismatch')
-        text = extract_html(raw)
-        if hashlib.sha256(text.encode()).hexdigest() != source['normalized_sha256']:
+        expected = extract_pdf(ROOT / source['snapshot_path'])
+        if hashlib.sha256(json.dumps(expected, ensure_ascii=False, sort_keys=True).encode()).hexdigest() != source['normalized_sha256']:
             raise ValueError('Normalization hash mismatch')
-        expected = source_units(text)
         actual = [p for p in pages if p.document_id == source['source_id']]
-        if len(expected) != len(actual) or any(u['text'] != p.text for u, p in zip(expected, actual)):
+        from dataclasses import asdict
+        if expected != [asdict(p) for p in actual]:
             raise ValueError('Prepared pages differ from original source snapshot')
     return pages, questions, configs, validation
 
@@ -102,7 +102,7 @@ def prepare_review(pages, chunks_by_strategy, traces, locations):
             correct = page is not None and meta.get('source') == page.source and expected_text == hit['text']
             correct = correct and all(meta.get(k) == v for k, v in page.metadata.items())
             filters = trace['gold'].get('filter', {})
-            obeys = all(meta.get(k) == v for k, v in filters.items()) if filters else None
+            obeys = matches_filter(meta, filters) if filters else None
             metadata.append({'strategy': trace['strategy'], 'question_id': trace['question_id'],
                              'rank': rank, 'chunk_id': hit['chunk_id'], 'metadata': meta,
                              'expected_metadata': {**page.metadata, 'source': page.source,
@@ -117,7 +117,7 @@ def model_info(embedder):
     files = {str(p.relative_to(cache)).replace('\\', '/'): hashlib.sha256(p.read_bytes()).hexdigest()
              for p in sorted(cache.rglob('*')) if p.is_file() and p.suffix in {'.onnx', '.json'} and 'snapshots' in str(p)}
     versions = {p: importlib.metadata.version(p) for p in
-                ['fastembed', 'onnxruntime', 'tokenizers', 'numpy', 'psycopg', 'pypdf', 'lxml', 'requests']}
+                ['fastembed', 'onnxruntime', 'tokenizers', 'numpy', 'psycopg', 'pypdf', 'requests']}
     return {'provider': 'local FastEmbed/ONNX CPU', 'model': embedder.model_name,
             'dimensions': embedder.dimensions, 'query_prefix': QUERY_PREFIX,
             'document_prefix': '', 'files_sha256': files, 'library_versions': versions,

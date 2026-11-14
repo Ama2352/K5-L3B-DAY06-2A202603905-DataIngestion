@@ -28,10 +28,25 @@ def test_corrupt_benchmark_is_rejected(mutation):
     elif mutation == 'page':
         questions[0]['gold_page'] = 999
     elif mutation == 'filter':
-        questions[5]['filter'] = {'chapter': 'fabricated'}
+        questions[5]['filter'] = {'section': 'fabricated'}
     elif mutation == 'split':
         questions[3]['split'] = 'dev'
     else:
         questions[0]['id'] = questions[1]['id']
     with pytest.raises(ValueError):
         validate_benchmark(pages, questions)
+
+
+def test_pdf_pages_do_not_use_html_1500_character_rule():
+    from starter.src.validation import validate_benchmark, matches_filter
+    pages, questions = data()
+    pages = deepcopy(pages)
+    page = next(p for p in pages if p.page == 38)
+    page.text = 'Useful short PDF content.'
+    assert validate_benchmark(pages, questions)['source_units'] == 37
+    del page.metadata['page_kind']
+    with pytest.raises(ValueError, match='1500'):
+        validate_benchmark(pages, questions)
+    assert matches_filter({'section':['2. Setup','3. Experiments']},{'section':'2. Setup'})
+    assert matches_filter({'section':['2. Setup','3. Experiments']},{'section':'3. Experiments'})
+    assert not matches_filter({'section':['2. Setup']},{'section':'invented'})
